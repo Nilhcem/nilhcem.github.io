@@ -1,3 +1,4 @@
+# General information
 title: android stuff & co.
 description: Gautier's personal development blog
 author: Gautier Mechling
@@ -6,13 +7,14 @@ url: "http://nilhcem.com"
 twitter_username: Nilhcem
 github_username: Nilhcem
 
-# Permalinks
-permalink: pretty
-
 # Build settings
 markdown: kramdown
 gems:
   - jekyll-feed
+
+# Additional settings
+permalink: pretty
+google_analytics: UA-91564367-1
 
 # Exclude these files from your production _site
 exclude:
