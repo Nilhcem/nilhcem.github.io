@@ -15,6 +15,8 @@ gems:
 # Additional settings
 permalink: none
 google_analytics: UA-91564367-1
+disqus:
+  shortname: nilhcem-dev
 
 # Exclude these files from your production _site
 exclude:
