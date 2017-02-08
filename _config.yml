@@ -13,7 +13,7 @@ gems:
   - jekyll-feed
 
 # Additional settings
-permalink: pretty
+permalink: none
 google_analytics: UA-91564367-1
 
 # Exclude these files from your production _site
