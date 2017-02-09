@@ -1,6 +1,6 @@
 ---
 layout: post
-title: The 2016 Android Developer Toolbox
+title: Talk - The 2016 Android Developer Toolbox
 permalink: talk/the-2016-android-developer-toolbox
 date: 2017-02-07
 comments: true
