@@ -3,6 +3,7 @@ layout: post
 title:  Android Things - Discovering the UART API
 permalink: android-things/discovering-the-UART-api
 date: 2017-02-15
+comments: true
 ---
 
 ![Serial port][pic1_serial]{: .center-image }

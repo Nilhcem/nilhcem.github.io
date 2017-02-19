@@ -3,6 +3,7 @@ layout: post
 title:  Android Things - Discovering the GPIO API through building a remote car
 permalink: android-things/discovering-the-GPIO-api-building-a-remote-car
 date: 2017-02-09
+comments: true
 ---
 
 <blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/riggaroo">@riggaroo</a> <a href="https://twitter.com/blundell_apps">@blundell_apps</a> 2017 will be the year of blinking leds powered by Android.</p>&mdash; Hugo Visser (@botteaap) <a href="https://twitter.com/botteaap/status/810406338123694080">December 18, 2016</a></blockquote>
