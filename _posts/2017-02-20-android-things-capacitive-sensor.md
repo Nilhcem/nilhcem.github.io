@@ -26,7 +26,7 @@ You only need 4 wires to plug it onto the Android Things board: one for the volt
 The MPR121 is communicating with the board via I²C (Inter-Integrated Circuit).
 
 I2C, *pronounced I, squared, C*, is a serial bus useful to connect peripheral devices with small data payloads.<br>
-All data is transferred over one wired named SDA, (**S**erial **DA**ta Line). It requires another wire: SCL (**S**erial **C**lock **L**ine) to coordinate data exchanges between the connected components.
+All data is transferred over one wire named SDA, (**S**erial **DA**ta Line). It requires another wire: SCL (**S**erial **C**lock **L**ine) to coordinate data exchanges between the connected components.
 
 Another nice thing with I²C: you can plug, if you want, multiple slaves on the SDA / SCL wires, so that a master (*here, our Raspberry Pi*) can send data to multiple peripherals at once. We won't use this feature today, but feel free to check the [Android Things official I²C documentation][official-i2c-doc] for detailed information.<br><br>
 
@@ -82,17 +82,17 @@ We can see that we need to interact with registers. Specifically, writing multip
 
 Good news for us, Android Things Peripheral I/O provides a `writeRegByte(address, value)` method to let us write an 8-bit value to a register address.
 
-Here's the code, translated for Android Things:
+Here's the same code, translated for Android Things:
 
 {% highlight java %}
 // The MPR121 I2C default address
 int I2C_ADDRESS = 0x5A;
 
-// First, we get a reference of our I2C device, connected on "I2C1"
+// First, we get a reference to our I2C device, connected on "I2C1"
 PeripheralManagerService service = new PeripheralManagerService();
 I2cDevice device = service.openI2cDevice("I2C1", I2C_ADDRESS);
 
-// Then, we write all the "important-but-I-don't-really-get-it" stuff
+// Then, we write all the "important-but-I-don't-really-get-it-yet" stuff
 device.writeRegByte(0x80, (byte) 0x63);
 device.writeRegByte(0x5E, (byte) 0x00);
 device.writeRegByte(0x2C, (byte) 0x01);
@@ -111,7 +111,7 @@ The MPR121 returns an int that corresponds, in its binary form, to the value of 
 
 For example, a value of `0x42` (binary: 0b00000**1**0000**1**0) would mean that sensors number 2 and 7 are touched.
 
-Example (Arduino):
+Here is the Arduino code, to get the value of all of these sensors:
 {% highlight c %}
 uint16_t Adafruit_MPR121::getSensorsStates(void) {
     uint16_t t = readRegister16(0x00);
@@ -120,8 +120,7 @@ uint16_t Adafruit_MPR121::getSensorsStates(void) {
 {% endhighlight %}
 
 This time, the method `readRegister16` reads the value on a 16-bit-integer at address `0x00`.<br>
-There's a binary AND operation to ensure we only get values for the 12 sensors. *(0x0FFF is equal to 0b0000111111111111 in binary)*.<br>
-Don't count, there are twelve **1**. Because there are twelve sensors.
+There's a binary AND operation to ensure we only get values for the 12 sensors. *(0x0FFF is equal to 0b0000111111111111 in binary)*. Don't count, there are twelve **1**. Because there are twelve sensors.
 
 Once again, there's a similar I²C method for Android Things: `readRegWord(address)` which reads a 16-bit-value at a given address.
 
@@ -149,14 +148,14 @@ boolean isBitSet(byte value, int bitIndex) {
 }
 {% endhighlight %}
 
-And we are (*already!*) done. Our driver is created.<br><br>
+And we are (*already!*) done. Our very simple driver is created.<br><br>
 
 
 ## Step 2: Do something fun with the MPR121
 
 Now, we can use it to do something cool.
 
-I decided to connect 12 drink cans to the MPR121, an external speakers to the Raspberry Pi, and use [Android's SoundPool][soundpool] (since API 1, *#LOL*) to play a sound when any of the cans are touched.
+I decided to connect 12 drink cans to the MPR121, an external speaker to the Raspberry Pi, and use [Android's SoundPool][soundpool] (since API 1, *#LOL*) to play a sound when any of the cans are touched.
 
 Here's a video of my *(let's find a name.. ahem...)* "Android Things Daft Punk Beer Can Sound Box", in action:
 
