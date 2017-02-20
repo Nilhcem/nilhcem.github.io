@@ -15,11 +15,9 @@ An easy way to get started with touch sensors is to play with the MPR121:
 
 ![MPR-121][pic1_mpr121]{: .center-image }
 
-This component offers up to 12 different capacitive channels, and is easy to use.
+This component offers 12 different capacitive channels. Connect up to 12 wires and be notified each time the MPR121 detects a capacitive touch on any of these wires.
 
 You only need 4 wires to plug it onto the Android Things board: one for the voltage (`3.3V`), one for the ground (`GND`), and 2 cables for the `SCL` and `SDA`.
-
-On the other side of the MPR121, you can connect 12 wires. You will be notified each time you touch one of these wires.
 
 ![Schematic][pic2_schematic]{: .center-image }
 
@@ -37,7 +35,7 @@ Another nice thing with I²C: you can plug, if you want, multiple slaves on the 
 
 The first thing to do, when you want to play with capacitive touch sensors, is to create a new Android Things project, and import the capacitive sensor driver.
 
-Well... there **is** a capacitive sensor driver [(CAP12XX)][cap12xx-driver], but no MPR121 driver.<br>
+Well... there **is** a capacitive sensor driver [(CAP12XX)][cap12xx-driver] for Android Things, but no MPR121 driver available yet.<br>
 Beginner's mistake... Driver is not compatible with this hardware.<br><br>
 
 
@@ -45,14 +43,14 @@ Beginner's mistake... Driver is not compatible with this hardware.<br><br>
 
 Since there are no MPR121 drivers yet, why not create our own?
 
-Starting from scratch may be complicated, especially when we are the kind of people who make beginners' mistakes.
+Writing one from scratch may look complicated, especially when we are the kind of people who make beginners' mistakes.
 
-So instead, we will read the sources of [Adafruit's Arduino MPR121 driver][arduino-driver], and port it to Android Things.<br><br>
+But porting an existing driver to Android Things is a much easier task. Lucky us, there's already [an Arduino driver][arduino-driver] from Adafruit. Let's see its content:<br><br>
 
 
 ### First, setting up the MPR121
 
-To work, the MPR121 needs some setup. Below is a sample of the Arduino library code:
+To be able to detect capacitive touches, the MPR121 needs some setup. Below is a sample of the Arduino library code:
 
 {% highlight c %}
 // The MPR121 I2C default address is at 0x5A
@@ -82,7 +80,7 @@ void Adafruit_MPR121::writeRegister(uint8_t reg, uint8_t value) {
 
 We can see that we need to interact with registers. Specifically, writing multiple register values to initialize the component.
 
-Good news for us, Android Things Peripheral I/O provides the `writeRegByte(address, value)` method to let us write an 8-bit value to a register address.
+Good news for us, Android Things Peripheral I/O provides a `writeRegByte(address, value)` method to let us write an 8-bit value to a register address.
 
 Here's the code, translated for Android Things:
 
@@ -109,7 +107,9 @@ The setup is done.
 
 Remember, the MPR121 is a component that can give us the state of 12 different sensors.
 If a sensor is pressed, the value will be `1`, if not, the value will be `0`.
-The MPR121 returns an int that corresponds to the value of every of these sensors, one for each bit.
+The MPR121 returns an int that corresponds, in its binary form, to the value of every of these sensors, one for each bit.
+
+For example, a value of `0x42` (binary: 0b00000**1**0000**1**0) would mean that sensors number 2 and 7 are touched.
 
 Example (Arduino):
 {% highlight c %}
@@ -122,8 +122,6 @@ uint16_t Adafruit_MPR121::getSensorsStates(void) {
 This time, the method `readRegister16` reads the value on a 16-bit-integer at address `0x00`.<br>
 There's a binary AND operation to ensure we only get values for the 12 sensors. *(0x0FFF is equal to 0b0000111111111111 in binary)*.<br>
 Don't count, there are twelve **1**. Because there are twelve sensors.
-
-For example, a value of `0x42` (binary: 0b00000**1**0000**1**0) would mean that sensors number 2 and 7 are touched.
 
 Once again, there's a similar I²C method for Android Things: `readRegWord(address)` which reads a 16-bit-value at a given address.
 
@@ -151,14 +149,14 @@ boolean isBitSet(byte value, int bitIndex) {
 }
 {% endhighlight %}
 
-And we are done. Our (very simple) driver is created.<br><br>
+And we are (*already!*) done. Our driver is created.<br><br>
 
 
 ## Step 2: Do something fun with the MPR121
 
-Now, we can do something cool.
+Now, we can use it to do something cool.
 
-I decided to connect 12 drink cans to the MPR121, external speakers to the Raspberry Pi, and use [Android's SoundPool][soundpool] (since API 1, *#LOL*) to play a sound when any of the cans are touched.
+I decided to connect 12 drink cans to the MPR121, an external speakers to the Raspberry Pi, and use [Android's SoundPool][soundpool] (since API 1, *#LOL*) to play a sound when any of the cans are touched.
 
 Here's a video of my *(let's find a name.. ahem...)* "Android Things Daft Punk Beer Can Sound Box", in action:
 
@@ -179,7 +177,7 @@ Here are all the methods you need to know, to play with I²C:
 * `readRegWord()` and `writeRegWord()` read or write a 16-bit register value.
 * `readRegBuffer()` and `writeRegBuffer()` read or write up to 32 consecutive register values as an array.
 
-You also have a `read()` and `write()` methods to transfer raw data.
+You also have some `read()` and `write()` methods to transfer raw data.
 
 More information, once again, on the [official documentation][official-i2c-doc].
 
