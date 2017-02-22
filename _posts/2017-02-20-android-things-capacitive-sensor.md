@@ -28,7 +28,7 @@ The MPR121 is communicating with the board via I²C (Inter-Integrated Circuit).
 I2C, *pronounced I, squared, C*, is a serial bus useful to connect peripheral devices with small data payloads.<br>
 All data is transferred over one wire named SDA, (**S**erial **DA**ta Line). It requires another wire: SCL (**S**erial **C**lock **L**ine) to coordinate data exchanges between the connected components.
 
-Another nice thing with I²C: you can plug, if you want, multiple slaves on the SDA / SCL wires, so that a master (*here, our Raspberry Pi*) can send data to multiple peripherals at once. We won't use this feature today, but feel free to check the [Android Things official I²C documentation][official-i2c-doc] for detailed information.<br><br>
+Another nice thing with I²C: you can plug, if you want, multiple slaves on the SDA / SCL wires, so that a master (*e.g. our Raspberry Pi*) can send data to multiple peripherals at once. We won't use this feature today, but feel free to check the [Android Things official I²C documentation][official-i2c-doc] for detailed information.<br><br>
 
 
 ## Step 1: Import the Android Things driver
