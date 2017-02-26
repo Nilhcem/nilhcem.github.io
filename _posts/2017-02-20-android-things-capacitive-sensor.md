@@ -159,7 +159,7 @@ I decided to connect 12 drink cans to the MPR121, an external speaker to the Ras
 
 Here's a video of my *(let's find a name.. ahem...)* "Android Things Daft Punk Beer Can Sound Box", in action:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/U2WAAycpba4" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="740" height="415" src="https://www.youtube.com/embed/U2WAAycpba4" frameborder="0" allowfullscreen></iframe>{: .center-image }
 <br>
 
 MPR121 driver and sample project on [github.com/nilhcem/mpr121-androidthings][mpr121-androidthings].<br><br>
