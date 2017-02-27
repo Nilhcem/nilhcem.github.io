@@ -137,7 +137,7 @@ Another issue: when the voice search fails to recognize a text, a dialog will st
 
 Hey, I told you it was the "Quick & Dirty way"!<br>
 
-So, add a physical GPIO button to cancel the dialog (*uglyyy*). Better (*well, it depends*), decompile the voice-search apk, modify the smali code to automatically dismiss that part, and recompile the apk. (*Please don't do that, for legal reasons*).
+So, add a physical GPIO button to cancel the dialog (*ugly*). Better (*well, it depends*), decompile the voice-search apk, modify the smali code to automatically dismiss that part, and recompile the apk. (*Please don't do that, for legal reasons*).
 
 Below, a video of the voice search speech recognizer, in action, repeating everything I say, after pressing a button ([source code here][sample-voicesearch]):
 
@@ -186,10 +186,10 @@ Luckily, Pocketsphinx already provides an [Android sample][pocketsphinx-androids
 In a nutshell, integrating Pocketsphinx in your Android (or Android Things) application consists in:
 
 - Adding a native (x86/arm) library, bundled in an .aar file to your project
-- Add some files (the language model / dictionary of all the words the recognizer can understand) to your assets directory
-- Create an instance of a SpeechRecognizer.
+- Adding some files (the language model / dictionary of all the words the recognizer can understand) to your assets directory
+- Creating an instance of a SpeechRecognizer.
 
-The SpeechRecognizer needs some setup. You need to give it some context about what kind of words it should understand at a given moment.<br>
+The SpeechRecognizer requires some setup. You need to give it some context about what kind of words it should understand at a given moment.<br>
 For example, the first thing I want it to understand is the "Ok Things" sentence. Nothing else. So I set it up the following way:
 
 {% highlight java %}
@@ -202,12 +202,12 @@ Then, I tell it to start listening to words from the `"OKTHINGS_CONTEXT"`:
 recognizer.startListening("OKTHINGS_CONTEXT");
 {% endhighlight %}
 
-From this moment, the recognizer will periodically call the `onPartialResult` callback. When the user stops talking, the `onEndOfSpeech` callback will be triggered, this is where you can stop the recognizer. Stopping the recognizer will trigger an `onResult` method with the recognized sentence in the method arguments.
+From this moment, the recognizer will periodically call the `onPartialResult` callback. When the user stops talking, `onEndOfSpeech` callback will be triggered, this is where you can stop the recognizer. Stopping the recognizer will trigger an `onResult` method with the recognized sentence as a method parameter.
 
 Once the recognizer has detected the "Ok Things" key phrase, it should switch context. It's not about recognizing "Ok Things" stuff anymore, but instead recognizing orders, such as "Turn on the TV", "Play some music", "What time is it?" etc.
 
 It is essential to provide a context. I found Sphinx to work pretty well when providing it a small set of predefined sentences/keywords.<br>
-On the contrary, text recognition was not as good, when using 133k words from the EN-US dictionnary.
+On the contrary, text recognition was not as good, when using 133,000 words from the EN-US dictionnary.
 
 To create your language model, first, create a list of sentences you expect it to recognize:
 {% highlight shell %}
@@ -251,7 +251,7 @@ Note: if you don't want to create your predefined actions context, you can confi
 recognizer.addNgramSearch("EN-US_CONTEXT", new File(assetsDir, "en-us.lm.bin"));
 {% endhighlight %}
 
-Yet, this is not something I would recommand. First because it will drastically increase your apk size, and then because the recognition would not be as good as with a given language model.<br>
+Yet, this is not something I would recommand. First because it will drastically increases your apk size, and then because the recognition would not be as good as with a given restricted language model.<br>
 
 I used pocketsphinx in the introduction video for this article.<br>
 Source code is available [on GitHub][sample-pocketsphinx].
@@ -259,11 +259,11 @@ Source code is available [on GitHub][sample-pocketsphinx].
 **Pros:**
 
 * Offline speech recognition
-* Works very well on a limited dictionary (predefined words / sentences)
+* Works well on a limited dictionary (predefined words / sentences)
 
 **Cons:**
 
-* Integration is complicated the first time you do it
+* Integration seems complicated at first
 * Random sentences detection is not as good as the one from the two previous solutions
 
 
@@ -271,7 +271,7 @@ Source code is available [on GitHub][sample-pocketsphinx].
 
 With Android Things Developer Preview 2, you can start adding Text-To-Speech and Speech-To-Text to your projects right now.<br>
 Text-To-Speech is so easy to integrate, it's a nice feature you can add to your smart device projects at (almost) no additional cost.<br>
-It will probably take you longer to integrate voice recognition, but it's worth the fun.
+It will probably take you a little longer to integrate voice recognition, but it's worth the fun.
 
 Source code, for the <s>simple, </s> stupid assistant is available on [github.com/Nilhcem/audiofun-androidthings][audiofun-androidthings].
 
