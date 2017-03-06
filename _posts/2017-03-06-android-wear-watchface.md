@@ -29,7 +29,7 @@ Sadly, I am a very bad graphic designer (*objectively, this time*) and drawing t
 
 ![GIMP preview][pic3_gimp]{: .center-image }
 
-Once the shape is exported to a file with transparent background, displaying the bitmap on the watch screen is easy:
+Once the shape is exported to a file with transparent background, displaying the bitmap on the watch screen was easy:
 
 {% highlight java %}
 // First, you need a bitmap reference
