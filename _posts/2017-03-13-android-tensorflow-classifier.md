@@ -6,23 +6,21 @@ date: 2017-03-13
 comments: true
 ---
 
-TensorFlow is an open source software library for deep learning, developed by Google and currently used in many of their projects.
+TensorFlow is an open source software library for machine learning, developed by Google and currently used in many of their projects.
 
 An **easy, fast, and fun** way to get started with TensorFlow is to build an image classifier: an offline and simplified alternative to [Google's Cloud Vision API][cloud-vision-api] where our Android device can detect and recognize objects from an image *(or directly from the camera input)*.
 
-Right now, I'm spending way too much time playing on the Nintendo Switch ([and I'm not alone][hiroshi-zelda]), so I decided to build a video-game-characters classifier.
-
-Sorry for my lack of inspiration...
+In this article, we will create an Android app that can recognize video-game characters.
 
 ![Example][pic1_example]{: .center-image }
 
 
 ## First, run the Android classifier sample
 
-An official TensorFlow Android Classifier sample is available on the main [GitHub repository][github-tensorflow-android].<br>
+An official TensorFlow Android image classifier sample is available on the main [GitHub repository][github-tensorflow-android].<br>
 However, if you want to build it, it will take you some time, as you'll need to install the NDK, Bazel, and the total build time with Android Studio will take around 40 minutes.
 
-That's not really compatible with my initial "**easy, fast, and fun**" description, so instead I've created a pre-built gradle standalone fork of TensorFlow 1.0.1 at [github.com/Nilhcem/tensorflow-classifier-android][tensorflow-classifier-android] you can directly clone, import on Android Studio and run within 2 minutes.
+That's not really compatible with my initial "**easy, fast, and fun**" description, so instead I've created a gradle standalone prebuilt fork of TensorFlow 1.0.1 at [github.com/Nilhcem/tensorflow-classifier-android][tensorflow-classifier-android] you can directly clone, import on Android Studio and run within 2 minutes.
 <br><br>
 
 **OPTIONAL (begin)**
@@ -46,9 +44,10 @@ Once you have imported the TensorFlow Android sample, run it with Android Studio
 
 ## Then, create your own image classifier
 
-Right now, the TensorFlow sample uses inception5h, a model pre-trained to detect 1000 objects from [ImageNet][image-net] 2012 Challenge image dataset.
+Right now, the TensorFlow sample uses "Inception", a model pre-trained to detect 1000 objects from [ImageNet][image-net] 2012 Challenge image dataset.
 
-What we will do instead, is to retrain this AI, so it can detect almost anything we want.<br>
+We are going to transfer learning, which means we are starting with a model that has been already trained on another problem. We will then be retraining it on a similar problem. Deep learning from scratch can take days, but transfer learning can be done in short order.
+
 And for that, we'll need some data....
 <br><br>
 
@@ -167,7 +166,7 @@ private static final String LABEL_FILE =
 
 ### 5. Test the trained AI
 
-We have installed the new AI model. Now, we can deploy the project on an Android device, and have fun detecting objects from our new retrained AI:
+We have installed the new AI model. Now, we can deploy the project on an Android device, and have fun detecting objects using our new retrained AI:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/WXvw8OxZoXQ" frameborder="0" allowfullscreen></iframe>{: .center-image }
 <br><br>
@@ -186,7 +185,7 @@ And if you want to use your own custom model instead, you will simply need to do
 
 ![Android Things][pic3_android-things]{: .center-image }<br>
 *(I shamelessly stole this LCD picture idea from [@riggaroo][riggaroo]'s latest conference. Don't tell her.)*<br>
-You can watch on this [YouTube video][video-androidthings], the custom classifier in action on Android Things.<br>
+You can watch the custom classifier in action, on this [YouTube video][video-androidthings].<br>
 The LCD driver used is the [1602 LCD module driver][lcd1602-driver].
 <br><br>
 
