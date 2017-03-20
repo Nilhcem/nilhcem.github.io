@@ -18,7 +18,7 @@ So far, we have been creating new projects from scratch using a breadboard and a
 This electronic toy is simple, it consists in an autonomous car that automatically follows the red light emitted by a stick.<br>
 
 This could be fun for children, but there's one problem though: **it does not really work as expected**.<br>
-The car is moving too randomly, the Lightstick is useless, children are frustrated and customers are disappointed.
+The car is moving too randomly, the lightstick is useless, children are frustrated and customers are disappointed.
 
 ![Amazon reviews][pic2_amazon-reviews]{: .center-image }
 
@@ -48,7 +48,7 @@ When taking a closer look at the toy, we can find some red and black wires from 
 <br>
 
 We are going to bare all those wires, and plug them into an **L298N Dual Motor Controller**.<br>
-If you want more info on that, I wrote [an article here][self-promotion] that explains why the L298N is useful, and how to connect everything to the Android Things board.<br>
+For more info on that part, I wrote [an article here][self-promotion] that explains why the L298N is useful, and how to connect everything to the Android Things board.<br>
 
 ![L298N][pic5_l298n]{: .center-image }
 <br>
@@ -112,7 +112,7 @@ The toy already has 2 LEDs for its headlights, we will use a resistor and a mult
 
 ## Wireless control
 
-To wirelessly control the car, I initially thought using the Nearby Connections API over Wi-Fi, as I [already did some time ago][self-promotion] (_#SelfPromotion_).<br>
+To wirelessly control the car, I initially thought using the Nearby Connections API over Wi-Fi, as I [already did some time ago][self-promotion].<br>
 It works flawlessly, and is easy to integrate.
 
 Problem: this blog post would not be very different from the original one, so I decided to use an even more generic solution: **embedding an HTTP server** inside the Android Things project
@@ -120,14 +120,14 @@ Problem: this blog post would not be very different from the original one, so I 
 
 ### NanoHTTPD to the rescue
 
-I decided to use NanoHTTPD, a tiny web server in Java.<br>
-You only need to add one dependency to your `build.gradle` file.
+We will use NanoHTTPD, a tiny web server in Java.<br>
+You only need to add one dependency to your `build.gradle` file:
 
 {% highlight groovy %}
 compile 'org.nanohttpd:nanohttpd:${version}'
 {% endhighlight %}
 
-And then, you can start and stop your server in your lifecycle methods (e.g. onCreate/onDestroy).<br>
+And then, you can start and stop your server in your lifecycle methods (_e.g. onCreate/onDestroy_).<br>
 To serve pages, you need to override a `serve` method.
 
 Simplified code:
@@ -173,13 +173,13 @@ public class HttpdServer extends NanoHTTPD {
 }
 {% endhighlight %}
 
-To control the car, you open the html page hosted by the Android Things device itself.<br>
-This page shows you some direction buttons you can click. When a button is pressed, an observer is notified so it can move the car to the specified direction.
+That way, the Android Things device will embed an HTTP server. To control it, simply open the device URL on any browser and click on the direction buttons.<br>
+When a button is pressed, an observer is notified so it can move the car to the specified direction.
 
 
 ## Conclusion
 
-Sometimes, you don't need to buy components (_e.g. a car chassis, dc motors, LEDs..._) to create some new projects. Reusing existing components can be a good alternative.<br>
+Sometimes, you don't need to buy components (_e.g. a car chassis, DC motors, LEDs..._) to create some new projects. Reusing existing components can be a good alternative.<br>
 The car toy is now able to serve web pages, and can be controlled manually. Implementing those features was pretty quick.
 
 To finish, we can place the Raspberry Pi inside the toy, and use a USB portable battery pack to power it.<br>
