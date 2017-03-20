@@ -158,7 +158,7 @@ You can see below a video of the car in action:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/FZgl8wn8cSY" frameborder="0" allowfullscreen></iframe><br>
 
 As a conclusion, the gap between turning an LED on, and succeeding in moving a two-DC motor-car is not as large as we might think.
-Technically simple, but the result looks pretty impressive !
+Technically simple, but the result looks pretty impressive!
 
 The GPIO API is a great way to get started with Android Things.<br>
 Now, your turn. Have fun!
