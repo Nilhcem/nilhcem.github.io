@@ -147,7 +147,7 @@ Below, a video of the voice search speech recognizer, in action, repeating every
 **Pros:**
 
 * Fast integration (simply install the apk and you're done). Great for prototyping
-* Offline recognition works pretty well (*if your English is good, of course*)
+* Voice recognition works pretty well (*if your English is good, of course*)
 * Once Android Things supports Speech-to-Text natively, you probably won't have to modify your source code. Simply uninstall the unofficial voice-search apk, and you're done
 
 **Cons:**
