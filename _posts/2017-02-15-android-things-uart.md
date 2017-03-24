@@ -6,7 +6,7 @@ date: 2017-02-15
 comments: true
 ---
 
-![Serial port][pic1_serial]{: .center-image }
+![Serial port][pic1_serial]
 
 If you can easily recognize the Serial port on this picture, let me first remind you that you are old.<br>
 We're going to talk about what's behind this interface today. Welcome to 2017.<br><br>
@@ -25,18 +25,18 @@ Over this blog post, we will discover the UART across two different Android Thin
 I always wanted to be a rock star, but can't play the piano. (*Do rockstars play piano?*)<br>
 Yet, I have years practicing on a computer keyboard; so, why not use my laptop to play Europe's "The final countdown" song?
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/OdsTbKnVXgY" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/OdsTbKnVXgY" frameborder="0" allowfullscreen></iframe>
 <br>
 
 To achieve that, I bought a PL2303HX USB to TTL cable:
 
-![UART cable][pic2_uartcable]{: .center-image }
+![UART cable][pic2_uartcable]
 
 We plug the USB cable into the computer, and the pins on the Raspberry Pi.
 
 As the 'RT' (**R**eceiver/**T**ransmitter) in UART suggests , I have to plug the Receiver (**Rx**) cable wire to the Raspberry Pi Transmitter (**Tx**) pin, and the Transmitter (**Tx**) cable wire to the Raspberry Pi Receiver (**Rx**) pin. Also, plug the Ground wire to the Ground pin *(this one was easy)*.
 
-![UART on rainbowHat][pic4_uartrainbow]{: .center-image }<br>
+![UART on rainbowHat][pic4_uartrainbow]<br>
 
 
 #### Raspberry Pi configuration
@@ -148,7 +148,7 @@ The Raspberry Pi pins use 3.3V, while the Arduino pins use 5V.<br>
 Connecting a Raspberry Pi pin to a voltage higher than 3.3V will likely damage your board.<br>
 To plug these 2 components together, we will use a small chip that will adapt the voltage: a Bi-Directional Logic Level Converter.
 
-![Level shifter][pic5_levelshifter]{: .center-image }
+![Level shifter][pic5_levelshifter]
 
 HV on the chip means *"**H**igh **V**oltage"*, and LV *"**L**ow **V**oltage"*.<br>
 Here, a low-voltage signal sent to LV will be shifted up to the higher voltage and sent out HV<br>
@@ -166,12 +166,12 @@ When the button is pressed, the Arduino will delegate its work to the Raspberry 
 
 See below a demonstration video
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7ncfLEEFoCo" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7ncfLEEFoCo" frameborder="0" allowfullscreen></iframe>
 *<center>#BlinkingAnLEDIsSometimesAHardStuff</center>*<br>
 
 #### Schematic
 
-![Arduino schematic][pic6_arduinofritzing_lq]{: .center-image }
+![Arduino schematic][pic6_arduinofritzing_lq]
 [full size version here][pic7_arduinofritzing_hq]<br><br>
 
 

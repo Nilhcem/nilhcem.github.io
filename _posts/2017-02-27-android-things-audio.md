@@ -17,7 +17,7 @@ Similar to *"Alexa"*, or *"Ok Google"*, our smart device should always be listen
 
 Below, a demonstration video of what we are going to achieve:
 
-<iframe width="740" height="415" src="https://www.youtube.com/embed/FkDltIOgcNg" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="740" height="415" src="https://www.youtube.com/embed/FkDltIOgcNg" frameborder="0" allowfullscreen></iframe>
 <br><br>
 
 ## Give voice to our device *(Text-To-Speech)*
@@ -26,7 +26,7 @@ First things first, we should connect some speakers to the Android Things board.
 You don't need to have USB audio speakers. An HDMI TV, or standard 3.5mm jack speakers will do the job too.<br>
 The speakers I own *(AmazonBasics A100)* are USB powered which is convenient as I can directly power those from the Raspberry Pi.
 
-![Speakers][pic1_speakers]{: .center-image }
+![Speakers][pic1_speakers]
 
 To give voice to our device, we will use Android's [Text-To-Speech (TTS) API][official-tts-doc].<br>
 This API is easy to use, start initializing the TTS engine:
@@ -62,7 +62,7 @@ Now things are getting complicated. We will add some voice recognition, using Sp
 Obviously, you'll need a USB microphone. I bought the MI-305 for around $5.<br>
 Connect it to one of the Raspberry Pi USB ports, and it works out of the box.
 
-![Microphone][pic2_microphone]{: .center-image }
+![Microphone][pic2_microphone]
 
 There are several ways to add some voice recognition to our apps.<br>
 The ideal one, on Android, is to start the speech [RecognizerIntent][recognizerintent-doc] action.
@@ -131,7 +131,7 @@ On the first launch you will probably have to accept a UI dialog.<br>
 I repeat: "accept a UI dialog"... "on a nano-computer"... "with probably no screens, no input devices, nothing".<br>
 (hint: simply temporarily connect a USB mouse to the Rapsberry Pi, or use Vysor. You only have to do this step once)<br>
 
-![UI Dialog][pic3_dialog]{: .center-image }
+![UI Dialog][pic3_dialog]
 
 Another issue: when the voice search fails to recognize a text, a dialog will stays forever until you press back (*and on Android Things, you have no back button of course, until you add a physical one*).<br>
 
@@ -141,7 +141,7 @@ So, add a physical GPIO button to cancel the dialog (*ugly*). Better (*well, it 
 
 Below, a video of the voice search speech recognizer, in action, repeating everything I say, after pressing a button ([source code here][sample-voicesearch]):
 
-<iframe width="740" height="415" src="https://www.youtube.com/embed/gRmLhrkIup0" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="740" height="415" src="https://www.youtube.com/embed/gRmLhrkIup0" frameborder="0" allowfullscreen></iframe>
 <br>
 
 **Pros:**

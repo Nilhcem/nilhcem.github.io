@@ -13,7 +13,7 @@ comments: true
 When the first developer preview of Android Things was released in December 2016, my twitter timeline was flooded with pictures of lonely LEDs, blinking on top of large breadboards.
 And of course, I contributed too.
 
-![LED][pic1_led]{: .center-image }
+![LED][pic1_led]
 
 The truth is that for many of us, Android developers, having the possibility to interact with physical objects is something completely new.<br>
 We have been creating software for years. Polished applications used by millions of users is not something that impresses us so easily, but succeeding in blinking an LED is a different matter.
@@ -69,21 +69,21 @@ If I were a smart guy, I would probably buy the components separately, but (**wa
 
 Below, a picture of the Mohoo Kit Chassis I bought on Amazon for $15
 
-![Chassis pieces][pic2_chassis_before]{: .center-image }
+![Chassis pieces][pic2_chassis_before]
 
 The battery box is necessary, as the Raspberry Pi power is not enough to get the motors working properly.<br>
 But keep in mind the battery box will be only for the motors. You will need an external power source for the Raspberry Pi (*I decided to use a portable power bank*)
 
 **20 minutes later**
 
-![Chassis assembled][pic3_chassis_after]{: .center-image }<br><br>
+![Chassis assembled][pic3_chassis_after]<br><br>
 
 
 #### Buying an L298N dual motor controller
 
 The chassis kit by itself is not enough to have a functionning car, we need to buy the last component separately: an L298N H-Bridge motor controller. I found mine for $2 on aliexpress.
 
-![L298N][pic4_l298n]{: .center-image }<br>
+![L298N][pic4_l298n]<br>
 
 The L298N is a great component that allows us to control the speed and direction of two DC motors.
 
@@ -93,7 +93,7 @@ We will plug the 2 wires of each DC motors to each sides of the L298N. We'll als
 Finally, we connect the L298N controller to the Raspberry Pi using 5 wires. 1 ground and 4 GPIOs<br><br>
 
 
-![Schematic][pic5_fritzing]{: .center-image }<br>
+![Schematic][pic5_fritzing]<br>
 
 It is important that both the battery pack ground wire and the Raspberry Pi ground wire are connected to the same L298N ground pin
 
@@ -129,7 +129,7 @@ switch (direction) {
 Moving a toy car is as easy as turning 2 LEDs on at the same time.<br><br>
 
 
-![Result][pic6_result]{: .center-image }<br>
+![Result][pic6_result]<br>
 
 
 # Why would you need Android Things for that?

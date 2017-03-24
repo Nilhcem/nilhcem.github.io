@@ -13,14 +13,14 @@ So far, we have been creating new projects from scratch using a breadboard and a
 
 ## Follow me Poli
 
-![Original toy][pic1_original-toy]{: .center-image }
+![Original toy][pic1_original-toy]
 
 This electronic toy is simple, it consists in an autonomous car that automatically follows the red light emitted by a stick.<br>
 
 This could be fun for children, but there's one problem though: **it does not really work as expected**.<br>
 The car is moving too randomly, the lightstick is useless, children are frustrated and customers are disappointed.
 
-![Amazon reviews][pic2_amazon-reviews]{: .center-image }
+![Amazon reviews][pic2_amazon-reviews]
 
 Look at those Amazon reviews! It's so sad, because the toy could be fun and the hardware looks Ok.<br>
 It is time to use some Android Things magic here: replacing the software, and making the toy fun to use.
@@ -31,7 +31,7 @@ It is time to use some Android Things magic here: replacing the software, and ma
 
 First, we need to unscrew the toy case to see what's inside:
 
-![Inside the toy][pic3_inside]{: .center-image }
+![Inside the toy][pic3_inside]
 
 We can see that we have 2 DC motors, some sensors, LEDs, and other components we can reuse.
 Let's focus on the motor part first.
@@ -44,13 +44,13 @@ We won't need to buy a car chassis, 2 DC motors and a battery holder, as we will
 
 When taking a closer look at the toy, we can find some red and black wires from the battery box (_power and ground_). Also, each motor has 2 wires (_to simplify: one to make it move forward, and one to make it move backward_).
 
-![DC motors][pic4_dcmotors]{: .center-image }
+![DC motors][pic4_dcmotors]
 <br>
 
 We are going to bare all those wires, and plug them into an **L298N Dual Motor Controller**.<br>
 For more info on that part, I wrote [an article here][self-promotion] that explains why the L298N is useful, and how to connect everything to the Android Things board.<br>
 
-![L298N][pic5_l298n]{: .center-image }
+![L298N][pic5_l298n]
 <br>
 
 Now, let's figure out which GPIO wire is for which direction. For that, there is no secret: we will give current to each GPIO, and observe which wheel is moving to which direction.
@@ -61,7 +61,7 @@ Gpio gpio = manager.openGpio("BCM22")
 gpio.setValue(true)
 {% endhighlight %}
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/cA9LqPu7ui0" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cA9LqPu7ui0" frameborder="0" allowfullscreen></iframe>
 <br>
 
 It seems that this *BCM22* GPIO here is for actually moving the left wheel forward. Now we can repeat the same operation with the 3 others GPIOs, and we will be able to figure out how making the car move.
@@ -106,7 +106,7 @@ For example, it could be a good idea to add a light sensor, and automatically tu
 
 The toy already has 2 LEDs for its headlights, we will use a resistor and a multimeter to test those LEDs first and determine the positive/negative leads.
 
-![Multimeter][pic6_multimeter]{: .center-image }
+![Multimeter][pic6_multimeter]
 <br>
 
 
@@ -185,7 +185,7 @@ The car toy is now able to serve web pages, and can be controlled manually. Impl
 To finish, we can place the Raspberry Pi inside the toy, and use a USB portable battery pack to power it.<br>
 I only had a huge Power Bank, but a smaller one could easily be placed inside the box, so it won't look too experimental 😂.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Q4ukWClPJQE" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Q4ukWClPJQE" frameborder="0" allowfullscreen></iframe>
 
 [self-promotion]: http://nilhcem.com/android-things/discovering-the-GPIO-api-building-a-remote-car
 [pic1_original-toy]: /public/images/20170320/01_followme-poli.jpg

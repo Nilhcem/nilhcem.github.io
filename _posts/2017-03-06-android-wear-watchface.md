@@ -13,12 +13,12 @@ Hopefully, we, android developer, do not have that kind of problems, as we only 
 In this blog post, I will tell you how I created a watch face from a hoodie, during an initially boring evening at home.<br>
 Please note this is not a step-by-step tutorial, but more likely a "making-of". If you're interested in knowing how to build watch faces from scratch, follow the official [watchface codelab][watchface-codelab].
 
-![Watch face preview][pic1_final]{: .center-image }
+![Watch face preview][pic1_final]
 <br>
 
 It all started a week ago, when my eyes landed on a sweatshirt that I immediately decided to buy.
 
-![Hoodie preview][pic2_hoodie]{: .center-image }
+![Hoodie preview][pic2_hoodie]
 
 I actually liked it so much (*don't judge me, taste is subjective*) that I started creating a watch face inspired from it.
 
@@ -27,7 +27,7 @@ I actually liked it so much (*don't judge me, taste is subjective*) that I start
 
 Sadly, I am a very bad graphic designer (*objectively, this time*) and drawing the shape by hand would take me years. The fastest and easiest solution for me was to take a picture of the hoodie and use GIMP's fuzzy select (magic wand) to cut it, then resize it, color it to white, and save it.
 
-![GIMP preview][pic3_gimp]{: .center-image }
+![GIMP preview][pic3_gimp]
 
 Once the shape is exported to a file with transparent background, displaying the bitmap on the watch screen was easy:
 
@@ -74,12 +74,12 @@ public void onDraw(Canvas canvas, Rect bounds) {
 }
 {% endhighlight %}
 
-![Ugly result][pic4_ugly]{: .center-image }
+![Ugly result][pic4_ugly]
 *#ObjectivelyUgly*
 
 I tried experimenting with other solutions, as seen below:
 
-![Experimentations][pic5_experiments]{: .center-image }
+![Experimentations][pic5_experiments]
 <br>
 
 
@@ -92,7 +92,7 @@ A way to achieve that is to draw a **clockwise arc**, starting from the usual ho
 
 Let's say it's 10:30, so I draw a clockwise arc (via [Canvas#drawArc][canvas-drawarc-doc]) from 10'o clock to 30 minutes
 
-![10:30][pic6_ten-thirty]{: .center-image }
+![10:30][pic6_ten-thirty]
 
 {% highlight java %}
 public void onDraw(Canvas canvas, Rect bounds) {

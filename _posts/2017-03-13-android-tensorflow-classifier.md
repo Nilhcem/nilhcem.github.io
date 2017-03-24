@@ -12,7 +12,7 @@ An **easy, fast, and fun** way to get started with TensorFlow is to build an ima
 
 In this article, we will create an Android app that can recognize video-game characters.
 
-![Example][pic1_example]{: .center-image }
+![Example][pic1_example]
 
 
 ## First, run the Android classifier sample
@@ -38,7 +38,7 @@ If you want to port the TensorFlow official Android Sample to a prebuilt Android
 
 Once you have imported the TensorFlow Android sample, run it with Android Studio and start detecting things
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lvG1F6tRV5g" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lvG1F6tRV5g" frameborder="0" allowfullscreen></iframe>
 <br><br>
 
 
@@ -58,7 +58,7 @@ We will create a `~/tf_files/games` folder and place each set of jpeg images in 
 
 A quick way to download multiple images at once is to search something on Google Images, and use a [Chrome extension for batch download][fatkun-batch].
 
-![Chrome Plugin Preview][pic2_chrome-plugin]{: .center-image }
+![Chrome Plugin Preview][pic2_chrome-plugin]
 <br><br>
 
 ### 2. Retrain the model to learn from your images
@@ -168,7 +168,7 @@ private static final String LABEL_FILE =
 
 We have installed the new AI model. Now, we can deploy the project on an Android device, and have fun detecting objects using our new retrained AI:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/WXvw8OxZoXQ" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="560" height="315" src="https://www.youtube.com/embed/WXvw8OxZoXQ" frameborder="0" allowfullscreen></iframe>
 <br><br>
 
 
@@ -183,7 +183,7 @@ And if you want to use your own custom model instead, you will simply need to do
 - Remove the `.aar` lib and use TensorFlow's latest libs instead
 - Modify the constants in the `TensorFlowImageClassifier.java` file
 
-![Android Things][pic3_android-things]{: .center-image }<br>
+![Android Things][pic3_android-things]<br>
 *(I shamelessly stole this LCD picture idea from [@riggaroo][riggaroo]'s latest conference. Don't tell her.)*<br>
 You can watch the custom classifier in action, on this [YouTube video][video-androidthings].<br>
 The LCD driver used is the [1602 LCD module driver][lcd1602-driver].
@@ -197,7 +197,7 @@ Better, you could create a robot that changes its behaviour and its way of talki
 You can use deep learning algorithm to identify skin cancer, or detect defective pieces and automatically stop a production line as soon as possible.
 
 Why not even create a sign language recognizer?<br>Have fun!<br>
-![Heart sign with hands][pic4_heart]{: .center-image }
+![Heart sign with hands][pic4_heart]
 <center>❤❤❤</center>
 
 [cloud-vision-api]: https://cloud.google.com/vision/

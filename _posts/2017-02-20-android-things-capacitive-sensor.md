@@ -13,13 +13,13 @@ Physical buttons are nice, but sometimes, you may want to include capacitive but
 
 An easy way to get started with touch sensors is to play with the MPR121:
 
-![MPR-121][pic1_mpr121]{: .center-image }
+![MPR-121][pic1_mpr121]
 
 This component offers 12 different capacitive channels. Connect up to 12 wires and be notified each time the MPR121 detects a capacitive touch on any of these wires.
 
 You only need 4 wires to plug it onto the Android Things board: one for the voltage (`3.3V`), one for the ground (`GND`), and 2 cables for the `SCL` and `SDA`.
 
-![Schematic][pic2_schematic]{: .center-image }
+![Schematic][pic2_schematic]
 
 ## SCL? SDA?
 
@@ -159,7 +159,7 @@ I decided to connect 12 drink cans to the MPR121, an external speaker to the Ras
 
 Here's a video of my *(let's find a name.. ahem...)* "Android Things Daft Punk Beer Can Sound Box", in action:
 
-<iframe width="740" height="415" src="https://www.youtube.com/embed/U2WAAycpba4" frameborder="0" allowfullscreen></iframe>{: .center-image }
+<iframe width="740" height="415" src="https://www.youtube.com/embed/U2WAAycpba4" frameborder="0" allowfullscreen></iframe>
 <br>
 
 MPR121 driver and sample project on [github.com/nilhcem/mpr121-androidthings][mpr121-androidthings].<br><br>
