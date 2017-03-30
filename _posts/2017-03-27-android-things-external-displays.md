@@ -46,7 +46,9 @@ hdmi_mode=87
 hdmi_cvt 800 480 60 6 0 0 0
 ```
 
-Using a small HDMI screen is a good idea if you are building a "pepper"/"buddy"-like robot
+Using a small HDMI screen is a good idea if you are building a "pepper"/"buddy"-like robot.  
+While the Waveshare screen supports touch inputs over SPI. It does not work out of the box with Android Things yet.  
+If you need a screen that supports touch input, compatible with Android Things, you may consider buying the official Raspberry Pi screen.
 
 
 **Pros:**
