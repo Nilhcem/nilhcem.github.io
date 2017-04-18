@@ -2,7 +2,7 @@
 layout: post
 title:  Android Things - USB communications
 permalink: android-things/usb-communications
-date: 2017-04-17
+date: 2017-04-18
 comments: true
 ---
 
@@ -242,4 +242,4 @@ As [Marcos Placona][arduwrap-article] explained in a blog post, some components 
 [usb-specs]: http://www.beyondlogic.org/usbnutshell/usb5.shtml
 [arduwrap-article]: https://androidthings.rocks/2017/03/28/how-to-use-android-libraries-with-android-things/
 
-[pic01_pn532]: /public/images/20170417/01_pn532.jpg
+[pic01_pn532]: /public/images/20170418/01_pn532.jpg
