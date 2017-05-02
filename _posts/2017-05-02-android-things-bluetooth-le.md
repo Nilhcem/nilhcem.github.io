@@ -404,7 +404,7 @@ public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState
 ### Enabling notifications for the counter characteristic
 
 The `discoverServices` method will then call an `onServicesDiscovered` method you'll have to override.  
-Our client wants to be notified of each `CHARACTERISTIC_COUNTER_UUID` change, so it's the right place to start writing on the descriptor:
+Our client wants to be notified of each `CHARACTERISTIC_COUNTER_UUID` change, so it's the right place to start writing to the descriptor:
 
 {% highlight java %}
 @Override
@@ -497,12 +497,12 @@ Thanks to Android Things, we will add some fun, and create a physical object aro
 
 ### A physical counter device
 
-The display used here will be the "MAX7219 8-digit module".  
+The display used here will be a "MAX7219 8-digit module".  
 
 ![pic07_8digits]
 
 As the name suggests, it uses a MAX7219 to control the segment display.  
-In a previous post (_[Using external displays][external-displays-post]_), we already mentioned about the MAX7219 to control an 8x8 LED matrix. Good thing, you can use the same driver ([LED control library][led-control-driver]) to interact with this device.  
+In a previous post (_[Using external displays][external-displays-post]_), we already mentioned about the MAX7219 to control an 8x8 LED matrix. Good thing, you can use the same driver ([LED control library][led-control-driver]) to interact with this device via SPI.  
 
 Example: writing "0042":
 
@@ -529,9 +529,9 @@ servo.setPulseDurationRange(1, 2);
 servo.setAngleRange(-90, 90);
 servo.setEnabled(true);
 
-servo.setAngle(mServo.getMaximumAngle());
+servo.setAngle(servo.getMaximumAngle());
 Thread.sleep(1000);
-servo.setAngle(mServo.getMinimumAngle());
+servo.setAngle(servo.getMinimumAngle());
 {% endhighlight %}
 
 ### An Android Wear app
@@ -541,9 +541,9 @@ This was not planned initially, but since it uses exactly the same APIs, it took
 
 ## Conclusion
 
-Communicating via Bluetooth LE may seem very complicated at first. You will need to write a lot of code to communicate via Bluetooth LE, but once you understand how BLE works, you'll find out that it's actually very verbose, but straightforward and completely coherent with the Bluetooth LE specs.
+Communicating via Bluetooth LE may seem quite complicated at first. You will need to write a lot of code to communicate via Bluetooth LE, but once you understand how it works, you'll find out that it's actually very verbose, for sure, but still straightforward and completely coherent with the Bluetooth LE specs.
 
-To simplify the article, I did not handle edge cases (such as checking return values, or enabling the Bluetooth if it is not enabled yet, etc.) here.  
+To simplify the article, I did not handle edge cases (*such as checking return values, enabling the Bluetooth if it is not enabled yet, etc.*) here.  
 You can find a complete implementation on [github.com/Nilhcem/blefun-androidthings][blefun-androidthings].
 
 ![pic09_final]
