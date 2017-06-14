@@ -299,13 +299,13 @@ exports.ha = function(req, res) {
 
     switch (intent) {
         case "action.devices.SYNC":
-            sync(reqdata, res);
+            sync(req, res);
             break;
         case "action.devices.QUERY":
-            query(reqdata, res);
+            query(req, res);
             break;
         case "action.devices.EXECUTE":
-            execute(reqdata, res);
+            execute(req, res);
             break;
     }
 }
@@ -340,9 +340,9 @@ We can control 2 different devices:
 Below is the full `sync()` implementation that returns a JSON listing devices and traits:
 
 {% highlight javascript %}
-function sync(reqdata, res) {
+function sync(req, res) {
     let deviceProps = {
-        requestId: reqdata.requestId,
+        requestId: req.body.requestId,
         payload: {
             devices: [{
                 id: "1",
@@ -381,10 +381,10 @@ To answer questions such as *"Is my fan on?"*, the Google Assistant will call ou
 Here is the full implementation:
 
 {% highlight javascript %}
-function query(reqdata, res) {
+function query(req, res) {
     getDevicesDataFromFirebase(devices => {
         let deviceStates = {
-            requestId: reqdata.requestId,
+            requestId: req.body.requestId,
             payload: {
                 devices: {
                     "1": {
@@ -422,9 +422,9 @@ Finally, when users ask the Google Assistant to execute an action on a device, t
 This is where we can modify our Firebase data (remember, when a data is modified, the IoT device will immediately trigger the action). Here's a simplified implementation:
 
 {% highlight javascript %}
-function execute(reqdata, res) {
+function execute(req, res) {
     getDevicesDataFromFirebase(devices => {
-        let reqCommand = reqdata.inputs[0].payload.commands[0];
+        let reqCommand = req.body.inputs[0].payload.commands[0];
         let command = reqCommand.execution[0].command;
         let params = reqCommand.execution[0].params;
         let deviceId = reqCommand.devices[0].id;
@@ -442,7 +442,7 @@ function execute(reqdata, res) {
         }
 
         admin.database().ref().set(data);
-        sendResponse(reqdata, res);
+        sendResponse(req, res);
     });
 }
 {% endhighlight %}
