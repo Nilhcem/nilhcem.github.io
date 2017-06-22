@@ -138,12 +138,12 @@ The component in the picture above is a **MAX7219** LED dot matrix module. There
 Here is how you can display a bitmap using this driver:
 
 {% highlight java %}
-LedControl ledControl = new LedControl(SPI_NAME);
+LedControl ledControl = new LedControl(SPI_NAME, 1);
 Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.image);
-ledControl.draw(bmp);
+ledControl.draw(0, bmp);
 {% endhighlight %}
 
-You can also turn pixels on and off manually if you prefer via the `setLed(int row, int col, boolean on)` method.
+You can also turn pixels on and off manually if you prefer via the `setLed(int addr, int row, int col, boolean on)` method.
 <br><br>
 
 #### How to display some text on an LED matrix?
