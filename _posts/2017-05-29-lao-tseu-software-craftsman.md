@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 🇫🇷 - Lao Tseu, Software Craftsman
+title: Talk (french) - Lao Tseu, Software Craftsman
 permalink: talk/lao-tseu-software-craftsman
 date: 2017-05-29
 comments: true
