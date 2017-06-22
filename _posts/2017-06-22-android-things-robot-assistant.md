@@ -29,7 +29,7 @@ Instead of making cocktails, our robot will give us chocolate bars:
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ycEtvzPgCt8" frameborder="0" allowfullscreen></iframe>
 <br>
 
-Shoebox Robot (*that's its name*) has its own personality too, and likes to give us plenty of [Android Bad Advice][android-bad-advice].
+Shoebox Robot (*that's its name*) has its own personality too, and likes to give us plenty of [Bad Android Advice][bad-android-advice].
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sUkMqtiegTM" frameborder="0" allowfullscreen></iframe>
 <br>
@@ -135,7 +135,7 @@ to start our API.AI conversational app.
 ## Step 4: Create an API.AI webhook
 
 Now, everybody can communicate with our bot, but the integration is still limited: we need to add some business logic.  
-For example, when someone asks for an Android Bad Advice, API.AI should call our own webservice, so we can randomly select one advice, and send it back to the user via API.AI.  
+For example, when someone asks for a Bad Android Advice, API.AI should call our own webservice, so we can randomly select one advice, and send it back to the user via API.AI.  
 To do that, we add a webhook on API.AI, so that the platform will automatically call our web service with some JSON data:
 
 {% highlight json %}
@@ -159,7 +159,7 @@ To add a webhook, you need to go to the **Fulfillment** menu, and add your endpo
 ![pic07_webhook]
 <br>
 
-We've added a Google Cloud Function. Now, we can get intents, parameters, and perform actions. In that case, we will return a JSON with a randomly chosen Android Bad Advice:  
+We've added a Google Cloud Function. Now, we can get intents, parameters, and perform actions. In that case, we will return a JSON with a randomly chosen Bad Android Advice:  
 
 {% highlight javascript %}
 exports.webhook = function(req, res) {
@@ -330,7 +330,7 @@ Lastly, the source code of the shoebox robot is available on [github.com/Nilhcem
 
 [mocktails-mixer]: http://deeplocal.com/mocktailsmixer
 [mocktails-mixer-github]: https://github.com/deeplocal/mocktailsmixer
-[android-bad-advice]: https://twitter.com/anddev_badvice
+[bad-android-advice]: https://twitter.com/anddev_badvice
 [sample-googleassistant]: https://github.com/androidthings/sample-googleassistant
 [api-ai]: https://api.ai
 [actions-on-google]: http://actions.google.com/
