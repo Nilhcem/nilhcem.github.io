@@ -20,8 +20,13 @@ In this article, we will create an Android app that can recognize video-game cha
 An official TensorFlow Android image classifier sample is available on the main [GitHub repository][github-tensorflow-android].<br>
 However, if you want to build it, it will take you some time, as you'll need to install the NDK, Bazel, and the total build time with Android Studio will take around 40 minutes.
 
-That's not really compatible with my initial "**easy, fast, and fun**" description, so instead I've created a gradle standalone prebuilt fork of TensorFlow 1.0.1 at [github.com/Nilhcem/tensorflow-classifier-android][tensorflow-classifier-android] you can directly clone, import on Android Studio and run within 2 minutes.
-<br><br>
+That's not really compatible with my initial "**easy, fast, and fun**" description, so instead I've created a gradle standalone prebuilt fork of the TensorFlow 1.2.0 Android sample at [github.com/Nilhcem/tensorflow-classifier-android][tensorflow-classifier-android] you can directly clone, import on Android Studio and run within 2 minutes:
+
+```bash
+git clone https://github.com/Nilhcem/tensorflow-classifier-android.git
+git checkout 1.2.0
+```
+<br>
 
 **OPTIONAL (begin)**
 
@@ -31,10 +36,13 @@ If you want to port the TensorFlow official Android Sample to a prebuilt Android
 - Create a new Android Studio project (applicationId: `org.tensorflow.demo`), to have an already set up gradle configuration ([commit][commit-2])
 - Move TensorFlow's Android sample files into the new gradle project ([commit][commit-3])
 - Remove the DetectorActivity and StylizeActivity (*we will only need the ClassifierActivity today*) ([commit][commit-4])
-- Download the CI nightly prebuilt NDK libraries [from this link][nightly-prebuilt-libs] and place those into your gradle project ([commit][commit-5])
-- Download the [pre-trained ImageNet model (inception5h)][inception5h] to your assets folder ([commit][commit-6])
+- Add the tensorflow-android gradle dependency to your build.gradle file:  
+  `compile 'org.tensorflow:tensorflow-android:1.2.0'`
+- Download the [pre-trained ImageNet model (inception5h)][inception5h] to your assets folder ([commit][commit-5])
+- Optionaly, add a `tensorflow_demo` native library that contains methods for RGB -> YUV conversion ([commit][commit-6]). This step is optional as the sample app provides a Java fallback if native methods from `libtensorflow_demo.so` could not be loaded.
 
-**OPTIONAL (end)**<br>
+**OPTIONAL (end)**  
+<br>
 
 Once you have imported the TensorFlow Android sample, run it with Android Studio and start detecting things
 
@@ -67,11 +75,16 @@ Now that we have all our images, we will retrain the model.<br>
 We can use a docker container to have an already set up TensorFlow environment:
 
 {% highlight bash %}
-docker run -it -v $HOME/tf_files:/tf_files \
-  gcr.io/tensorflow/tensorflow:latest-devel
-cd /tensorflow
-git pull
-git checkout v1.0.1
+cd ~/
+git clone https://github.com/tensorflow/tensorflow.git
+cd ~/tensorflow
+git checkout v1.2.1
+
+docker run -it \
+  --volume ~/tf_files:/tf_files \
+  --volume ~/tensorflow:/tensorflow \
+  --workdir /tensorflow tensorflow/tensorflow:1.2.1 bash
+
 python tensorflow/examples/image_retraining/retrain.py \
   --bottleneck_dir=/tf_files/bottlenecks \
   --how_many_training_steps 4000 \
@@ -81,11 +94,9 @@ python tensorflow/examples/image_retraining/retrain.py \
   --image_dir /tf_files/games
 {% endhighlight %}
 
-Don't stop your container yet, you will need it again very soon.
-
 This operation can take several minutes depending on how many images you have and how many training steps you specified.
 
-These commands will make TensorFlow download the inception model and retrain it to detect images from `~/tf_files/games`.<br>
+These commands will make TensorFlow download the inception model and retrain it to detect images from `~/tf_files/games`.  
 The script will generate two files: the model in a protobuf file (`retrained_graph.pb`) and a label list of all the objects it can recognize (`retrained_labels.txt`).
 
 For more information, the best tutorial you can find on the Internet so far is Google's [TensorFlow for Poets][tensorflow-for-poets] codelab (*I highly recommend you to do it*)
@@ -101,64 +112,59 @@ We have our model. However, if we try to import it in our Android sample, we wil
 Op BatchNormWithGlobalNormalization is not available in GraphDef version 21. It has been removed in version 9. Use tf.nn.batch_normalization().
 ```
 
-We first need to optimize it first, using a tool named `optimize_for_inference`:
+The reason is actually simple: to be kept small, the mobile TensorFlow library only contains a subset of operations.  
+Some operations, such as `BatchNormWithGlobalNormalization`, are only used during the training (on your desktop / cloud computer), and therefore are not needed on mobile.
+
+To use our retrained model on a mobile device, we need to optimize it first, using a tool named `optimize_for_inference`, that removes all nodes that aren't needed, among other optimizations.
 
 {% highlight bash %}
-./configure # you can select all default values
-bazel build tensorflow/python/tools:optimize_for_inference
+python tensorflow/python/tools/optimize_for_inference.py \
+  --input=/tf_files/retrained_graph.pb \
+  --output=/tf_files/optimized_graph.pb \
+  --input_names="Mul" \
+  --output_names="final_result"
 {% endhighlight %}
 
-Building the tool should take around 20 minutes. *#BePatient*
-<br><br>
+This script will generate after a few minutes a `~/tf_files/optimized_graph.pb` file you will now be able into include in your Android project.  
+<br>
+
 
 **OPTIONAL (begin)**
 
-At this point, a good thing to do, to save time, would be to commit your current docker process to a new image. This way, you won't have to rebuild the `optimize_for_inference` tool anymore.
-
+While we could use the model on mobile already, let's make another optimization to drastically reduce the model size once compressed (in my case, the Android APK size will decrease from 96MB to 46MB after this optimization)
 
 {% highlight bash %}
-exit
-docker ps -a
-docker commit <container ID> <new_name>
-# And then start your new container with:
-docker run -it -v $HOME/tf_files:/tf_files <new_name>
-cd /tensorflow
+python tensorflow/tools/quantization/quantize_graph.py \
+  --input=/tf_files/optimized_graph.pb \
+  --output=/tf_files/rounded_graph.pb \
+  --output_node_names=final_result \
+  --mode=weights_rounded
 {% endhighlight %}
+
+This step will generate a file named `~/tf_files/rounded_graph.pb`.  
+It is a good idea to test this new model, to verify that the optimization hasn't had too negative an effect on the model's performance.
+
 **OPTIONAL (end)**<br><br>
 
-
-Now the tool is built, you can optimize your model:
-
-{% highlight bash %}
-bazel-bin/tensorflow/python/tools/optimize_for_inference \
-  --input=/tf_files/retrained_graph.pb \
-  --output=/tf_files/retrained_graph_optimized.pb \
-  --input_names=Mul \
-  --output_names=final_result
-{% endhighlight %}
-
-You can now exit your docker container.<br>
-This script will generate a `~/tf_files/retrained_graph_optimized.pb` file you will now be able into import in your Android project.
-
-For more information about mobile optimizations, I suggest you to read the [Tensorflow for Mobile Poets][tensorflow-for-mobile-poets] article
+For more information about mobile optimizations, I suggest you to follow the [Tensorflow for Poets 2: Optimize for Mobile][tensorflow-for-mobile-poets] codelab.
 <br><br>
 
 
 ### 4. Import the new model in your Android application
 
 We have our retrained model.<br>
-We can now delete the previous ImageNet model from our Android app's `assets` folder and place the new model (`~/tf_files/retrained_graph_optimized.pb` and `~/tf_files/retrained_labels.txt`) instead.
+We can now delete the previous ImageNet model from the Android app's `assets` folder and place the new model (`~/tf_files/optimized_graph.pb` (or `~/tf_files/rounded_graph.pb`) and `~/tf_files/retrained_labels.txt`) instead.
 
 Also, we should update some constants in the `ClassifierActivity.java`, as specified in a comment in this same file:
 {% highlight java %}
 private static final int INPUT_SIZE = 299;
 private static final int IMAGE_MEAN = 128;
-private static final float IMAGE_STD = 128;
+private static final float IMAGE_STD = 128f;
 private static final String INPUT_NAME = "Mul";
 private static final String OUTPUT_NAME = "final_result";
 
 private static final String MODEL_FILE =
-  "file:///android_asset/retrained_graph_optimized.pb";
+  "file:///android_asset/rounded_graph.pb"; // or optimized_graph.pb
 private static final String LABEL_FILE =
   "file:///android_asset/retrained_labels.txt";
 {% endhighlight %}
@@ -203,19 +209,18 @@ Why not even create a sign language recognizer?<br>Have fun!<br>
 [cloud-vision-api]: https://cloud.google.com/vision/
 [github-tensorflow-android]: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android
 [hiroshi-zelda]: https://twitter.com/lockheimer/status/840419726241157121
-[tensorflow-classifier-android]: https://github.com/Nilhcem/tensorflow-classifier-android
+[tensorflow-classifier-android]: https://github.com/Nilhcem/tensorflow-classifier-android/tree/1.2.0
 [commit-1]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/7c4664a55e33c62859e19ee10cfafe770bf299d8
 [commit-2]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/d6bdb0bd5e53fe505307ad841fd6b5c94e2aec11
 [commit-3]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/d608cadfb00b708c4a60b0685dff6c6b099948be
 [commit-4]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/52f5e72b53701d7337df1c8b1b8857e5c186f8e2
-[commit-5]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/e638b65a595216a0c8d0b7737040cdd4cd8bf4d9
-[commit-6]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/e2a52e52ee53635941f5bd065a2aa621f36367c0
-[nightly-prebuilt-libs]: https://ci.tensorflow.org/view/Nightly/job/nightly-android/
+[commit-5]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/e2a52e52ee53635941f5bd065a2aa621f36367c0
+[commit-6]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/4266a872541f9f96d7ee2e2f2433aa4c9fc368e3
 [inception5h]: https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip
 [image-net]: http://image-net.org
 [fatkun-batch]: https://chrome.google.com/webstore/detail/fatkun-batch-download-ima/nnjjahlikiabnchcpehcpkdeckfgnohf
 [tensorflow-for-poets]: https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/
-[tensorflow-for-mobile-poets]: https://petewarden.com/2016/09/27/tensorflow-for-mobile-poets/
+[tensorflow-for-mobile-poets]: https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2
 [sample-androidthings]: https://github.com/androidthings/sample-tensorflow-imageclassifier/
 [video-androidthings]: https://www.youtube.com/watch?v=2SJDGAv8URE
 [riggaroo]: https://twitter.com/riggaroo/status/839849263660154882
