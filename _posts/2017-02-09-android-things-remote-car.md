@@ -39,20 +39,20 @@ Understanding this API is the easiest and essential way to get started with Andr
 // First, we ask the PeripheralManagerService to give us a reference of our LED
 // We have connected our LED to the Raspberry Pi GPIO pin named "BCM21"
 // The LED is an output device. It receives orders from the board.
-Gpio legGpio = new PeripheralManagerService().openGpio("BCM21");
-legGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
+Gpio ledGpio = new PeripheralManagerService().openGpio("BCM21");
+ledGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
 
 // To turn the LED on, we set the value to true
-legGpio.setValue(true);
+ledGpio.setValue(true);
 
 // To turn the LED off, we set its value to false
-legGpio.setValue(false);
+ledGpio.setValue(false);
 
 // Alternatively, we can also get the LED value
-boolean isOn = legGpio.getValue();
+boolean isOn = ledGpio.getValue();
 
 // And we close the peripheral, because we are good guys
-legGpio.close();
+ledGpio.close();
 {% endhighlight %}
 
 As you can see, blinking an LED is as easy as setting a boolean value from false to true, and vice versa.
