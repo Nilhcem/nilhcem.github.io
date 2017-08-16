@@ -24,6 +24,7 @@ That's not really compatible with my initial "**easy, fast, and fun**" descripti
 
 ```bash
 git clone https://github.com/Nilhcem/tensorflow-classifier-android.git
+cd tensorflow-classifier-android
 git checkout 1.2.0
 ```
 <br>
@@ -185,9 +186,9 @@ There is already an official gradle sample project that works out-of-the-box wit
 
 And if you want to use your own custom model instead, you will simply need to do exactly the same steps explained in this article (*Android Things is Android, after all*):
 
-- Place your custom model (`.pb` and `.txt` files) in the assets directory
-- Remove the `.aar` lib and use TensorFlow's latest libs instead
-- Modify the constants in the `TensorFlowImageClassifier.java` file
+- Place your custom model (`.pb` and `.txt` files) in the `app/assets` directory
+- Update [tensorflow-android][tensorflow-android] dependency version in the `app/build.gradle` file
+- Modify the constants in the `Helper.java` file
 
 ![Android Things][pic3_android-things]<br>
 *(I shamelessly stole this LCD picture idea from [@riggaroo][riggaroo]'s latest conference. Don't tell her.)*<br>
@@ -223,6 +224,7 @@ Why not even create a sign language recognizer?<br>Have fun!<br>
 [tensorflow-for-mobile-poets]: https://codelabs.developers.google.com/codelabs/tensorflow-for-poets-2
 [sample-androidthings]: https://github.com/androidthings/sample-tensorflow-imageclassifier/
 [video-androidthings]: https://www.youtube.com/watch?v=2SJDGAv8URE
+[tensorflow-android]: https://bintray.com/google/tensorflow/tensorflow-android/_latestVersion
 [riggaroo]: https://twitter.com/riggaroo/status/839849263660154882
 [lcd1602-driver]: https://github.com/Nilhcem/1602A-androidthings
 [pic1_example]: /public/images/20170313/01_example.jpg
