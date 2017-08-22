@@ -25,7 +25,7 @@ That's not really compatible with my initial "**easy, fast, and fun**" descripti
 ```bash
 git clone https://github.com/Nilhcem/tensorflow-classifier-android.git
 cd tensorflow-classifier-android
-git checkout 1.2.0
+git checkout 1.3.0
 ```
 <br>
 
@@ -38,7 +38,7 @@ If you want to port the TensorFlow official Android Sample to a prebuilt Android
 - Move TensorFlow's Android sample files into the new gradle project ([commit][commit-3])
 - Remove the DetectorActivity and StylizeActivity (*we will only need the ClassifierActivity today*) ([commit][commit-4])
 - Add the tensorflow-android gradle dependency to your build.gradle file:  
-  `compile 'org.tensorflow:tensorflow-android:1.2.0'`
+  `compile 'org.tensorflow:tensorflow-android:1.3.0'`
 - Download the [pre-trained ImageNet model (inception5h)][inception5h] to your assets folder ([commit][commit-5])
 - Optionaly, add a `tensorflow_demo` native library that contains methods for RGB -> YUV conversion ([commit][commit-6]). This step is optional as the sample app provides a Java fallback if native methods from `libtensorflow_demo.so` could not be loaded.
 
@@ -79,12 +79,12 @@ We can use a docker container to have an already set up TensorFlow environment:
 cd ~/
 git clone https://github.com/tensorflow/tensorflow.git
 cd ~/tensorflow
-git checkout v1.2.1
+git checkout v1.3.0
 
 docker run -it \
   --volume ~/tf_files:/tf_files \
   --volume ~/tensorflow:/tensorflow \
-  --workdir /tensorflow tensorflow/tensorflow:1.2.1 bash
+  --workdir /tensorflow tensorflow/tensorflow:1.3.0 bash
 
 python tensorflow/examples/image_retraining/retrain.py \
   --bottleneck_dir=/tf_files/bottlenecks \
@@ -100,7 +100,7 @@ This operation can take several minutes depending on how many images you have an
 These commands will make TensorFlow download the inception model and retrain it to detect images from `~/tf_files/games`.  
 The script will generate two files: the model in a protobuf file (`retrained_graph.pb`) and a label list of all the objects it can recognize (`retrained_labels.txt`).
 
-For more information, the best tutorial you can find on the Internet so far is Google's [TensorFlow for Poets][tensorflow-for-poets] codelab (*I highly recommend you to do it*)
+For more information, the best tutorial you can find on the Internet so far is Google's [TensorFlow for Poets][tensorflow-for-poets] codelab (*I highly recommend you to read it*)
 <br><br>
 
 
@@ -216,7 +216,7 @@ Why not even create a sign language recognizer?<br>Have fun!<br>
 [commit-3]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/d608cadfb00b708c4a60b0685dff6c6b099948be
 [commit-4]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/52f5e72b53701d7337df1c8b1b8857e5c186f8e2
 [commit-5]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/e2a52e52ee53635941f5bd065a2aa621f36367c0
-[commit-6]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/4266a872541f9f96d7ee2e2f2433aa4c9fc368e3
+[commit-6]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/52de47888f42678050eeb94bc25970db517f1076
 [inception5h]: https://storage.googleapis.com/download.tensorflow.org/models/inception5h.zip
 [image-net]: http://image-net.org
 [fatkun-batch]: https://chrome.google.com/webstore/detail/fatkun-batch-download-ima/nnjjahlikiabnchcpehcpkdeckfgnohf
