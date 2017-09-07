@@ -6,7 +6,7 @@ date: 2017-04-06
 comments: true
 ---
 
-Eyal ([@Eyal_Lezmy][eyal-twitter]), Romain ([@romemore][romain-twitter]), and I organized our first Android Things workshop today, during Devoxx France.
+Eyal ([@Eyal_Lezmy][eyal-twitter]), Romain ([@romemore][romain-twitter]), and I organized an Android Things workshop during Devoxx France and droidcon Berlin.
 
 This article is a post-mortem explaining what worked, what did not, and how we organized ourselves.
 
@@ -63,7 +63,7 @@ Not complicated, just time consuming, and painful when you burn your fingers usi
 
 This part is tricky, and interesting.
 
-At the time of the workshop, the latest version of Android Things was Developer Preview 2.  
+At the time of the workshop, the latest version of Android Things was Developer Preview 0.5.1.  
 In this version, to deploy applications, you need to connect to the board first, via adb over TCP (using the `adb connect <IP>` command).  
 This means that you first need to know the IP of the board before accessing it.
 
@@ -103,7 +103,7 @@ When the workshop started. Everyone had issues with the Wi-Fi. The connection to
 This lasted for 30 minutes (*of hell and stress, both for us and the attendees*), until Romain saved us installing a second router.  
 We had 2 routers: one for the 20 Raspberry Pi, and 1 for the 20 attendees' computers.
 
-Once installed, it worked flawlessly. The workshop was saved.
+Once installed, it worked flawlessly. The workshop was saved, and we had no network issues anymore when we did the workshop again at droidcon Berlin.
 
 
 ## Preparing the workshop
@@ -130,9 +130,27 @@ Then, we had 2 hours left for the workshop. Attendees had to clone a repository,
 We were happy seeing attendees having fun, and all succeeding in building their wireless catapult during the time of the workshop.
 
 
-## Video
+## After the workshop
+
+Unfortunately, we could not give Android Things boards to attendees. Google lent us some, so we can reuse those in multiple events.  
+And it's quite complicated to keep a close eye on 40+ people when you are only 3 organizers, especially when the 3 of us are already helping other attendees.
+
+During devoxx, the room was closed, so when people left at the end of the workshop, it was easy for us to take the boards back and thank everyone personally.  
+But at another event, the room was always open, and people came and left whenever they wanted, which was really hard for us to watch everyone. We lost 2 boards there.
+
+After some discussion, Romain came with a nice idea: at the beginning of the workshop, we should take attendees badges before we lend them a board, and associate the board's number to the badge, so that people can take their badges back in exchange of the board.
+
+
+## Videos
+
+### #devoxxFR
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/8IJgy1IaCIQ" frameborder="0" allowfullscreen></iframe>
+<br>
+
+### #droidconDE
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/AK3Mk4RnJk8" frameborder="0" allowfullscreen></iframe>
 <br>
 
 Thanks a lot to everyone involved. The talk received great feedbacks, this means a lot to us given the amount of work we had provided to prepare it.
