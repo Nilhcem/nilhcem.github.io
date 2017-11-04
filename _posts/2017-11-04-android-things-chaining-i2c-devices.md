@@ -2,7 +2,7 @@
 layout: post
 title:  Android Things - Discovering & chaining I²C devices
 permalink: android-things/chaining-i2c-devices
-date: 2017-10-16
+date: 2017-11-04
 comments: true
 ---
 
@@ -16,8 +16,8 @@ Now that we've got some I²C devices, let's start.
 We will use 3 different devices:  
 
 - SSD1306 OLED display ([driver][driver-ssd1306])
-- LCD 1602 with PCF8574 I2C adapter ([driver][driver-pcf8574])
-- Arduino IIC fan ([implementation][driver-fan])
+- LCD 1602 with PCF8574 I²C adapter ([driver][driver-pcf8574])
+- Arduino I²C fan ([implementation][driver-fan])
 
 ![pic01_components]
 <br>
@@ -36,10 +36,10 @@ Here's how, from the [official I2C documentation][official-i2c-doc]:
 <br>
 
 
-## Determining I2C address without datasheet
+## Determining I²C address without datasheet
 
 With I²C, every slave device must have an address, even if the bus contains only a single slave.  
-Thus, when you open an I2CDevice using the Things Support Library, you have to specify the I2C bus and the device address:
+Thus, when you open an I2CDevice using the Things Support Library, you have to specify the I²C bus and the device address:
 
 {% highlight kotlin %}
 val pioService = PeripheralManagerService()
@@ -192,6 +192,6 @@ You can find the complete source code on GitHub:
 [i2c-doc]: https://developer.android.com/things/sdk/pio/i2c.html
 [i2cfun-sources]: https://github.com/Nilhcem/i2cfun-androidthings/
 
-[pic01_components]: /public/images/20171016/01_components.jpg
-[pic02_connections]: /public/images/20171016/02_connections.png
-[pic03_assets]: /public/images/20171016/03_assets.png
+[pic01_components]: /public/images/20171104/01_components.jpg
+[pic02_connections]: /public/images/20171104/02_connections.png
+[pic03_assets]: /public/images/20171104/03_assets.png
