@@ -20,12 +20,12 @@ In this article, we will create an Android app that can recognize video-game cha
 An official TensorFlow Android image classifier sample is available on the main [GitHub repository][github-tensorflow-android].<br>
 However, if you want to build it, it will take you some time, as you'll need to install the NDK, Bazel, and the total build time with Android Studio will take around 40 minutes.
 
-That's not really compatible with my initial "**easy, fast, and fun**" description, so instead I've created a gradle standalone prebuilt fork of the TensorFlow 1.2.0 Android sample at [github.com/Nilhcem/tensorflow-classifier-android][tensorflow-classifier-android] you can directly clone, import on Android Studio and run within 2 minutes:
+That's not really compatible with my initial "**easy, fast, and fun**" description, so instead I've created a gradle standalone prebuilt fork of the TensorFlow 1.4.0 Android sample at [github.com/Nilhcem/tensorflow-classifier-android][tensorflow-classifier-android] you can directly clone, import on Android Studio and run within 2 minutes:
 
 ```bash
 git clone https://github.com/Nilhcem/tensorflow-classifier-android.git
 cd tensorflow-classifier-android
-git checkout 1.3.0
+git checkout 1.4.0
 ```
 <br>
 
@@ -38,7 +38,7 @@ If you want to port the TensorFlow official Android Sample to a prebuilt Android
 - Move TensorFlow's Android sample files into the new gradle project ([commit][commit-3])
 - Remove the DetectorActivity and StylizeActivity (*we will only need the ClassifierActivity today*) ([commit][commit-4])
 - Add the tensorflow-android gradle dependency to your build.gradle file:  
-  `compile 'org.tensorflow:tensorflow-android:1.3.0'`
+  `compile 'org.tensorflow:tensorflow-android:1.4.0'`
 - Download the [pre-trained ImageNet model (inception5h)][inception5h] to your assets folder ([commit][commit-5])
 - Optionaly, add a `tensorflow_demo` native library that contains methods for RGB -> YUV conversion ([commit][commit-6]). This step is optional as the sample app provides a Java fallback if native methods from `libtensorflow_demo.so` could not be loaded.
 
@@ -79,12 +79,12 @@ We can use a docker container to have an already set up TensorFlow environment:
 cd ~/
 git clone https://github.com/tensorflow/tensorflow.git
 cd ~/tensorflow
-git checkout v1.3.0
+git checkout v1.4.0
 
 docker run -it \
   --volume ~/tf_files:/tf_files \
   --volume ~/tensorflow:/tensorflow \
-  --workdir /tensorflow tensorflow/tensorflow:1.3.0 bash
+  --workdir /tensorflow tensorflow/tensorflow:1.4.0 bash
 
 python tensorflow/examples/image_retraining/retrain.py \
   --bottleneck_dir=/tf_files/bottlenecks \
@@ -210,7 +210,7 @@ Why not even create a sign language recognizer?<br>Have fun!<br>
 [cloud-vision-api]: https://cloud.google.com/vision/
 [github-tensorflow-android]: https://github.com/tensorflow/tensorflow/tree/master/tensorflow/examples/android
 [hiroshi-zelda]: https://twitter.com/lockheimer/status/840419726241157121
-[tensorflow-classifier-android]: https://github.com/Nilhcem/tensorflow-classifier-android/tree/1.2.0
+[tensorflow-classifier-android]: https://github.com/Nilhcem/tensorflow-classifier-android/tree/1.4.0
 [commit-1]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/7c4664a55e33c62859e19ee10cfafe770bf299d8
 [commit-2]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/d6bdb0bd5e53fe505307ad841fd6b5c94e2aec11
 [commit-3]: https://github.com/Nilhcem/tensorflow-classifier-android/commit/d608cadfb00b708c4a60b0685dff6c6b099948be
