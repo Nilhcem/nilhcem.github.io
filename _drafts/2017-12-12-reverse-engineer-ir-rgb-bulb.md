@@ -2,7 +2,7 @@
 layout: post
 title:  IoT - Reverse engineering an infrared RGB bulb to use with the Google Assistant
 permalink: iot/reverse-engineering-ir-rgb-bulb
-date: 2017-12-06
+date: 2017-12-12
 comments: true
 ---
 
@@ -230,9 +230,9 @@ We will see that in the following article, reverse engineering simple Bluetooth 
 [esp8266-code]: https://github.com/Nilhcem/ir-rgb-bulb-fun/tree/master/ESP8266Code
 [smarthome-post]: http://nilhcem.com/android-things/google-assistant-smart-home
 
-[pic01_philips-hue]: /public/images/20171206/01_philipshue.jpg
-[pic02_rgb-bulb-from-aliexpress]: /public/images/20171206/02_aliexpress.jpg
-[pic03_remote]: /public/images/20171206/03_remote.jpg
-[pic04_fritzing]: /public/images/20171206/04_fritzing.png
-[pic05_musicbulb]: /public/images/20171206/05_musicbulb.jpg
-[pic06_sniffinglogs]: /public/images/20171206/06_sniffinglogs.jpg
+[pic01_philips-hue]: /public/images/20171212/01_philipshue.jpg
+[pic02_rgb-bulb-from-aliexpress]: /public/images/20171212/02_aliexpress.jpg
+[pic03_remote]: /public/images/20171212/03_remote.jpg
+[pic04_fritzing]: /public/images/20171212/04_fritzing.png
+[pic05_musicbulb]: /public/images/20171212/05_musicbulb.jpg
+[pic06_sniffinglogs]: /public/images/20171212/06_sniffinglogs.jpg

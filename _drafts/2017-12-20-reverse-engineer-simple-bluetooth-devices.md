@@ -2,7 +2,7 @@
 layout: post
 title:  IoT - Reverse engineering simple Bluetooth LE devices
 permalink: iot/reverse-engineering-simple-bluetooth-devices
-date: 2017-12-11
+date: 2017-12-20
 comments: true
 ---
 
@@ -142,13 +142,13 @@ In a following article, we will try to reverse-engineer step by step a little mo
 [nrf-app]: https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 [ble-apis]: https://developer.android.com/guide/topics/connectivity/bluetooth.html
 
-[pic01_smartcandle]: /public/images/20171211/01_smartcandle.jpg
-[pic02_smartcandle_app]: /public/images/20171211/02_smartcandle_app.png
-[pic03_nrfcandle]: /public/images/20171211/03_nrfcandle.png
-[pic04_devoption]: /public/images/20171211/04_devoption.png
-[pic05_wireshark]: /public/images/20171211/05_wireshark.jpg
-[pic06_filter]: /public/images/20171211/06_filter.jpg
-[pic07_nrfsend]: /public/images/20171211/07_nrfsend.jpg
-[pic08_yellow]: /public/images/20171211/08_yellow.jpg
-[pic09_magicblue]: /public/images/20171211/09_magicblue.jpg
-[pic10_wireshark]: /public/images/20171211/10_wireshark.jpg
+[pic01_smartcandle]: /public/images/20171220/01_smartcandle.jpg
+[pic02_smartcandle_app]: /public/images/20171220/02_smartcandle_app.png
+[pic03_nrfcandle]: /public/images/20171220/03_nrfcandle.png
+[pic04_devoption]: /public/images/20171220/04_devoption.png
+[pic05_wireshark]: /public/images/20171220/05_wireshark.jpg
+[pic06_filter]: /public/images/20171220/06_filter.jpg
+[pic07_nrfsend]: /public/images/20171220/07_nrfsend.jpg
+[pic08_yellow]: /public/images/20171220/08_yellow.jpg
+[pic09_magicblue]: /public/images/20171220/09_magicblue.jpg
+[pic10_wireshark]: /public/images/20171220/10_wireshark.jpg
