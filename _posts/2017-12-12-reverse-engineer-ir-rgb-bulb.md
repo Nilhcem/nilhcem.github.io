@@ -51,7 +51,7 @@ The idea is to get rid of the remote, to control the lights programmatically ins
 
 For that, we will use a **VS1838B** and the [IRrecvDump sample][irrecvdump-sample] from the Arduino IRRemote library to intercept and copy IR signals sent from the remote. Then, we will be able to replicate those signals with a microcontroller and an IR LED.
 
-This schematics shows how to connect the VS1838B infrared receiver to an Arduino:  
+This schematic shows how to connect the VS1838B infrared receiver to an Arduino:  
 ![pic04_fritzing]
 
 Now, when we press a button from the RGB bulb remote to the VS1838B, the Arduino will intercept the IR signals and write to the Serial console the detect IR code and encoding:
