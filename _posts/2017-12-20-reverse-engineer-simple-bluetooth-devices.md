@@ -8,7 +8,7 @@ comments: true
 
 In a [previous post][ir-rgb-bulb-post], we reverse-engineered an infrared light bulb, so we can control it using the Google Assistant, but we quickly encountered some limitations due to the infrared technology.
 
-Our goal this time is to replace infrared lights with Bluetooth bulbs instead, but before that let's practice on a very simple device to reverse engineer: a smart candle.<br><br>
+Our goal this time is to replace infrared lights with Bluetooth bulbs instead, but before that let's see how we can reverse engineer a simple Bluetooth LE device, such as a smart candle.<br><br>
 
 
 ## MiPow PlayBulb candle
@@ -66,7 +66,7 @@ adb pull /sdcard/Android/data/btsnoop_hci.log
 
 ![pic05_wireshark]
 
-Since we are only interested in analyzing Bluetooth packets related to our smart candle, we can add a filter, specifying our Bluetooth device address we got from the nRF Connect app, adding the following filter:
+Since we are only interested in analyzing Bluetooth packets related to our smart candle, we can add a filter, specifying our Bluetooth device address we got from the "nRF Connect" app, adding the following filter:
 
 ```
 bluetooth.addr==F1:5A:4B:16:AC:E6
