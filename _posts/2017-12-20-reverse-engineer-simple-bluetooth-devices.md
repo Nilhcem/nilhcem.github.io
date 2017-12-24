@@ -51,7 +51,7 @@ There are many unknowns!
 
 To answer that question, we will intercept Bluetooth packets, and use the official Android application to control the candle colors.
 
-Android, since 4.4 (KitKat) has a really convenient Developer Option, name "Bluetooth HCI snoop log", which will sniff Bluetooth HCI (Host Controller Interface) packets, and save those in the `/sdcard/Android/data/btsnoop_hci.log` file of the device.
+Android, since 4.4 (KitKat) has a really convenient Developer Option, name "Bluetooth HCI snoop log", which will sniff Bluetooth HCI (Host Controller Interface) packets, and save those in the `/sdcard/Android/data/btsnoop_hci.log` file of the device. (In some devices, the file is located in `/sdcard/btsnoop_hci.log`).
 
 ![pic04_devoption]
 
