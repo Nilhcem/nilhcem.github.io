@@ -2,7 +2,7 @@
 layout: post
 title:  IoT - Reverse engineering a Bluetooth LED name badge
 permalink: iot/reverse-engineering-bluetooth-led-name-badge
-date: 2018-01-04
+date: 2018-01-15
 comments: true
 ---
 
@@ -261,12 +261,12 @@ The complete source code to control this device (you can buy on [aliexpress][ali
 [bitmap-code]: https://github.com/Nilhcem/ble-led-name-badge-android/blob/master/app/src/main/java/com/nilhcem/blenamebadge/device/DataToByteArrayConverter.kt#L137
 [aliexpress]: https://fr.aliexpress.com/item/Sign-Scrolling-advertising-business-card-show-digital-display-tag-LED-name-badge-Rechargeable-Programmable-White/32759781214.html
 
-[pic01_device]: /public/images/20180104/01_device.jpg
-[pic02_app]: /public/images/20180104/02_app.png
-[pic03_wireshark]: /public/images/20180104/03_wireshark.png
-[pic04_app]: /public/images/20180104/04_app.png
-[pic05_app_a]: /public/images/20180104/05_app_a.png
-[pic06_badge_a]: /public/images/20180104/06_badge_a.jpg
-[pic07_itworks]: /public/images/20180104/07_works.jpg
-[pic08_pixelart]: /public/images/20180104/08_pixelart.png
-[pic09_final]: /public/images/20180104/09_final.jpg
+[pic01_device]: /public/images/20180115/01_device.jpg
+[pic02_app]: /public/images/20180115/02_app.png
+[pic03_wireshark]: /public/images/20180115/03_wireshark.png
+[pic04_app]: /public/images/20180115/04_app.png
+[pic05_app_a]: /public/images/20180115/05_app_a.png
+[pic06_badge_a]: /public/images/20180115/06_badge_a.jpg
+[pic07_itworks]: /public/images/20180115/07_works.jpg
+[pic08_pixelart]: /public/images/20180115/08_pixelart.png
+[pic09_final]: /public/images/20180115/09_final.jpg
