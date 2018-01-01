@@ -249,7 +249,7 @@ The Google Assistant SDK is currently in version `v1alpha2`. This release is the
 
 Device Actions only support a limited set of traits at the moment, and the French version of the assistant is not working as well as the English version is to control embedded devices.
 
-However, for an alpha release, it is really stable, fast to implement and looks really promising.  
+However, for an alpha release, it is stable, fast to implement and looks really promising.  
 Device Actions simplify a lot controlling a device from the Google Assistant. It sends us directly JSON data to control our device, removing the intermediaries.
 
 If your device is already integrating the Google Assistant SDK, and you do not need remote control, you should definitely use this option instead of Actions on Google projects.  
