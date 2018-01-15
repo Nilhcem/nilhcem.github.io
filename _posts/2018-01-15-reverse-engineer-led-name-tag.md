@@ -13,7 +13,7 @@ I recently bought a Bluetooth LED name badge thinking it could be a nice externa
 
 ![pic01_device]
 
-_Unlike what can be seen on the box, I would not recommend using this badge for your hotel employees, unless you have fun customers._
+_Unlike what can be seen on the package, I would not recommend using this badge for your hotel employees, especially if you have fun customers._
 <br><br>
 
 
