@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Android Things - Discovering the UART API becoming a rock star
+title:  Android Things - Discovering the UART API
 permalink: android-things/discovering-the-UART-api
 date: 2017-02-15
 comments: true
