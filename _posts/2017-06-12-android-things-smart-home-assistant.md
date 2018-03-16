@@ -465,11 +465,7 @@ When everything is tested and ok, go to the Actions on Google console to publish
 ### A note on security
 
 This article is a demonstration of what you can quickly achieve with Smart Home and the Google Assistant.  
-You will probably notice that using Firebase the way I did here (listening to database changes) is a bad idea as Android Things does not support Firebase Authentication (even Firebase auth via JWT is not supported), which means that we are forced to use public rules (at least for reading). This is not acceptable on production.
-
-One way to secure this project would be first to enable user-based security Firebase rules. Then, delegate the IoT authentication to a mobile companion app (that sends back the auth token to the IoT device, for example), and finally use a different technology (e.g. FCM) to be notified from the web service when an exec intent is received.
-
-This is just an example. You have plenty of ways to make it safe. As usual, it will take you longer to make things really secure, but if you're pushing to production, this will save you trouble and money later.
+You should obviously add some Firebase security rules and authenticate to Firebase from your Android Things device before using it on production.
 <br><br>
 
 
