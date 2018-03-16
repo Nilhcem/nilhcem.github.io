@@ -78,7 +78,7 @@ class ArduinoFan(i2cName: String, i2cAddress: Int) : AutoCloseable {
     private var device: I2cDevice? = null
 
     init {
-        device = PeripheralManagerService().openI2cDevice(i2cName, i2cAddress)
+        device = PeripheralManager.getInstance().openI2cDevice(i2cName, i2cAddress)
     }
 
     override fun close() {

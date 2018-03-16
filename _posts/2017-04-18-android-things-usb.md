@@ -20,7 +20,7 @@ You can see below a video of what we will achieve: the USB device will be an Ard
 
 There are two different ways to communicate with a USB device via Android Things.
 
-* If the device is a USB-Serial and if it reports a `/dev/tty*` device handle through the kernel, then you won't need to use any USB Host API. Instead, try to call `PeripheralManagerService.getUartDeviceList()`. If you can see a new UART endpoint, this means that you can directly use the [UART API][uart-api] to communicate with the USB device. No need to use USB APIs at all *(if you don't need those)*.
+* If the device is a USB-Serial and if it reports a `/dev/tty*` device handle through the kernel, then you won't need to use any USB Host API. Instead, try to call `PeripheralManager.getUartDeviceList()`. If you can see a new UART endpoint, this means that you can directly use the [UART API][uart-api] to communicate with the USB device. No need to use USB APIs at all *(if you don't need those)*.
 
 * If the device does not report a new `/dev/tty*` after being plugged in *(e.g. the kernel doesn’t have the driver built-in)*, you are forced to use the USB layer. You will need to manipulate the [USB Host][usb-host] API, which allows a regular user space application to communicate with USB devices without root privileges or support needed from the Linux kernel.
 

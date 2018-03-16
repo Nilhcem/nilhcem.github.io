@@ -48,11 +48,11 @@ Consult the [official documentation][raspberrypi-doc] for detailed instructions.
 #### Sample UART Loopback
 
 The best way to start playing with UART is to clone the official UART sample [(sample-uartloopback)][official-uart-sample] and import it on Android Studio.<br>
-The sample is easy to understand. First things first, the UART device initialisation:
+The sample is easy to understand. First things first, the UART device initialization:
 
 {% highlight java %}
 // We receive an instance of the "UART0" device.
-UartDevice uart = new PeripheralManagerService().openUartDevice("UART0");
+UartDevice uart = PeripheralManager.getInstance().openUartDevice("UART0");
 
 // Some basic UART configuration.
 // Make sure to configure the other device the exact same way.

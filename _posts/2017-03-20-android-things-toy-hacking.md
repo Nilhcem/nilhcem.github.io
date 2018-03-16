@@ -56,7 +56,7 @@ For more info on that part, I wrote [an article here][self-promotion] that expla
 Now, let's figure out which GPIO wire is for which direction. For that, there is no secret: we will give current to each GPIO, and observe which wheel is moving to which direction.
 
 {% highlight java %}
-PeripheralManagerService manager = new PeripheralManagerService();
+PeripheralManager manager = PeripheralManager.getInstance();
 Gpio gpio = manager.openGpio("BCM22")
 gpio.setValue(true)
 {% endhighlight %}

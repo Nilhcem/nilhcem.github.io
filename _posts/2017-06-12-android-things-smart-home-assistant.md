@@ -179,7 +179,7 @@ class MainBoardComponents : LifecycleObserver {
 
     @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
     fun onCreate() {
-        relay = PeripheralManagerService().openGpio("BCM18")
+        relay = PeripheralManager.getInstance().openGpio("BCM18")
         relay.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW)
         relay.setActiveType(Gpio.ACTIVE_LOW)
 

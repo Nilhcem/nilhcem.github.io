@@ -89,8 +89,8 @@ Here's the same code, translated for Android Things:
 int I2C_ADDRESS = 0x5A;
 
 // First, we get a reference to our I2C device, connected on "I2C1"
-PeripheralManagerService service = new PeripheralManagerService();
-I2cDevice device = service.openI2cDevice("I2C1", I2C_ADDRESS);
+PeripheralManager manager = PeripheralManager.getInstance();
+I2cDevice device = manager.openI2cDevice("I2C1", I2C_ADDRESS);
 
 // Then, we write all the "important-but-I-don't-really-get-it-yet" stuff
 device.writeRegByte(0x80, (byte) 0x63);

@@ -36,10 +36,10 @@ To simplify, it's a very simple way to start sending, or stop sending current to
 Understanding this API is the easiest and essential way to get started with Android Things.
 
 {% highlight java %}
-// First, we ask the PeripheralManagerService to give us a reference of our LED
+// First, we ask the PeripheralManager to give us a reference of our LED
 // We have connected our LED to the Raspberry Pi GPIO pin named "BCM21"
 // The LED is an output device. It receives orders from the board.
-Gpio ledGpio = new PeripheralManagerService().openGpio("BCM21");
+Gpio ledGpio = PeripheralManager.getInstance().openGpio("BCM21");
 ledGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
 
 // To turn the LED on, we set the value to true

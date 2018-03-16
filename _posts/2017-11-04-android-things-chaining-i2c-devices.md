@@ -42,8 +42,8 @@ With I²C, every slave device must have an address, even if the bus contains onl
 Thus, when you open an I2CDevice using the Things Support Library, you have to specify the I²C bus and the device address:
 
 {% highlight kotlin %}
-val pioService = PeripheralManagerService()
-val device = pioService.openI2cDevice(I2C_BUS_NAME, I2C_ADDRESS)
+val manager = PeripheralManager.getInstance()
+val device = manager.openI2cDevice(I2C_BUS_NAME, I2C_ADDRESS)
 {% endhighlight %}
 
 As you have guessed, addresses are useful when multiple devices are connected to the same bus.  
@@ -54,14 +54,16 @@ If you don't know a device's address, you can either:
 - Add the following extension function to your Android Things project:  
 
 {% highlight kotlin %}
-fun PeripheralManagerService.scanI2cAvailableAddresses(i2cName: String): List<Int> {
+fun PeripheralManager.scanI2cAvailableAddresses(i2cName: String): List<Int> {
     return (0..127).filter { address ->
-        openI2cDevice(i2cName, address).use { device ->
+        with(openI2cDevice(i2cName, address)) {
             try {
-                device.write(ByteArray(1), 1)
+                write(ByteArray(1), 1)
                 true
             } catch (e: IOException) {
                 false
+            } finally {
+                close()
             }
         }
     }
@@ -74,7 +76,7 @@ Here's how to call it and write device addresses to the logs:
 
 {% highlight kotlin %}
 Log.i(TAG, "Scanning I2C devices")
-pioService.scanI2cAvailableAddresses(I2C_BUS_NAME)
+manager.scanI2cAvailableAddresses(I2C_BUS_NAME)
     .map { String.format(Locale.US, "0x%02X", it) }
     .forEach { address -> Log.i(TAG, "Found: $address") }
 }
