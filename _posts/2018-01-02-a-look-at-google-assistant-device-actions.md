@@ -99,7 +99,11 @@ Using Android Things makes it easy and fast to build devices. A few minutes late
 We want to be able to use the Google Assistant to control the 3D lamp and change its color and brightness. First, we need to register the device to tell that it supports the `OnOff`, `ColorSpectrum` and `Brightness` traits.
 
 To register a device, Google provides a [Python tool][python-tool] and a [REST API][rest-api]. Choose the one you prefer.  
-We will use the Python command line tool, as it is a good choice to get started quickly.
+
+_**Update**: There is now an easier way to register devices, using the Google Assistant Developer Console.  
+More information [on this link][register-device]._  
+
+We will use the Python command line tool, as it is a good choice to get started quickly.  
 
 The first command we have to execute is to register a **device model**, which is an abstraction representing what our device can do.  
 Our `3D lamp` is a kind of `LIGHT` device supporting the `OnOff`, `ColorSpectrum`, and `Brightness` traits:  
@@ -247,7 +251,9 @@ A device registered with the Google Assistant SDK won't support remote control:
 
 The Google Assistant SDK is currently in version `v1alpha2`. This release is the first one supporting Device Actions.
 
-Device Actions only support a limited set of traits at the moment, and the French version of the assistant is not working as well as the English version is to control embedded devices.
+The French version of the assistant is not working as well as the English version is to control embedded devices, and Device Actions only support a limited set of traits at the moment.
+
+_**Update**: Device Actions now support custom traits. See [here][custom-device-actions] for additional information._  
 
 However, for an alpha release, it is stable, fast to implement and looks really promising.  
 Device Actions simplify a lot controlling a device from the Google Assistant. It sends us directly JSON data to control our device, removing the intermediaries.
@@ -270,7 +276,9 @@ In the `README` file, you will find all the information to tell you how to creat
 [blinkt-driver]: https://github.com/Nilhcem/blinkt-androidthings/
 [mpr121-driver]: https://github.com/Nilhcem/mpr121-androidthings
 [configure-project]: https://developers.google.com/assistant/sdk/guides/library/python/embed/config-dev-project-and-account
+[register-device]: https://developers.google.com/assistant/sdk/guides/service/python/embed/register-device
 [registration-tool-help]: https://developers.google.com/assistant/sdk/reference/device-registration/device-tool
+[custom-device-actions]: https://developers.google.com/assistant/sdk/guides/service/python/extend/custom-actions
 [smart-home-article]: http://nilhcem.com/android-things/google-assistant-smart-home
 [source-code]: https://github.com/Nilhcem/device-actions-androidthings
 
