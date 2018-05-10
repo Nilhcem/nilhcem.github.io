@@ -63,7 +63,7 @@ uart.setStopBits(1);
 
 // Finally, we register a callback on a background thread that will be
 // triggered when some data is received via UART.
-uart.registerUartDeviceCallback(mCallback, mInputHandler);
+uart.registerUartDeviceCallback(mInputHandler, mCallback);
 {% endhighlight %}
 
 One baud is equal to 1 bit per second. A 115200 baud rate is therefore equal to 14KBps.<br>
