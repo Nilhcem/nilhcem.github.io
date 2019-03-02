@@ -193,7 +193,7 @@ We could build a battery-powered similar device (ESP8266 + BME280), but I am too
 
 ![pic10_xiaomi_hygrothermograph]
 
-While designed for an indoor usage, it supports temperatures from -9.9°C to 60°C. I've been using it outside for a few weeks already and the device works really well.
+While designed for an indoor usage, it supports temperatures from -9.9°C to 60°C. I've been using it outside for a month already and the device works really well.
 
 ![pic11_xiaomi_outside]
 <br>
@@ -207,7 +207,7 @@ This code in running on the Raspberry Pi 3 B+ along with all the other docker se
 
 ![pic12_rpi_htop]
 
-The Mijia device requires a single AAA battery. I use rechargeable batteries and it lost only 6% battery this week.
+The Mijia device requires a single AAA battery. I use rechargeable batteries and it lasts more than a month.
 
 ![pic13_mijia_battery]
 <br>
@@ -217,9 +217,9 @@ The Mijia device requires a single AAA battery. I use rechargeable batteries and
 
 You can find the complete source code on [github.com/Nilhcem/home-monitoring-grafana][github-repo] to build a similar project for your home.
 
-I have been monitoring the inside and outside temperature/humidity for a week, and noticed that I'm getting more and more curious about the weather now.  
+I have been monitoring the inside and outside temperature/humidity for a month, and noticed that I'm getting more and more curious about the weather now.  
 Actually, the more I have data and the more curious I am.  
-Size of the influxDB after a week: 40MB.
+Size of the influxDB after a month: 30MB.
 
 A future iteration would be to try to do a similar project using exclusively online services, only keeping sensors in the house, getting rid of the Raspberry Pi.
 
