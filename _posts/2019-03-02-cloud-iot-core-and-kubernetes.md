@@ -26,7 +26,8 @@ It is a successor to the ESP8266, with a faster CPU _(dual-core @ 160 or 240 MHz
 ![pic01_esp32]
 
 The ESP32 will communicate with a BME280 temperature & humidity sensor.  
-To have a visual representation of the temperature, we can print data to the Serial, and use the `Serial Plotter` feature from the Arduino IDE (available in the `Tools` menu):
+To prototype quickly, we will use the Arduino IDE to write code for the ESP32.  
+We will print temperature data to the Serial, and use the `Serial Plotter` feature from the Arduino IDE (available in the `Tools` menu) to have a visual representation of the data:
 
 ```c
 void loop() {
@@ -266,11 +267,12 @@ $ gcloud pubsub subscriptions pull --auto-ack $PUBSUB_SUBSCRIPTION --limit=1
 We will be using the MQTT bridge, which means that our microcontroller code will need an MQTT client, and a way to generate a JWT from a given private key.  
 We could write some code for that, but hopefully some very lightweight libraries and SDKs already exist to speed up and simplify the integration between a device and Cloud IoT Core.
 
-The recommended way to connect a device to Google Cloud IoT Core is to use the [Cloud IoT Device SDK][cloud-iot-device-sdk], which consists of client libraries written in Embedded C that enable developers to securely connect, provision, and manage devices with Cloud IoT Core.
+The recommended way to connect a device to Google Cloud IoT Core is to use the **[Cloud IoT Device SDK][cloud-iot-device-sdk]**, which consists of client libraries written in Embedded C that enable developers to securely connect, provision, and manage devices with Cloud IoT Core.  
+You can find on [this repository][cloud-iot-device-sdk-esp32-sample] a sample project that demonstrates how to use the Cloud IoT Device SDK on the ESP32, using ESP-IDF (FreeRTOS), if you are interested.  
 
-If, like here, you are writing some Arduino C code, the easiest approach is to use the [google-cloud-iot-arduino][google-cloud-iot-arduino] library.
+In this blog post, we won't be using the Cloud IoT SDK though, as there is an easier way to integrate Cloud IoT Core to an Arduino project, by using the [google-cloud-iot-arduino][google-cloud-iot-arduino] and the [arduino-mqtt][arduino-mqtt] libraries.
 
-In the setup, we will call the `setupCloudIoT` to setup the Wi-Fi, the device time, and to start an MQTT client.  
+After importing the Arduino libraries, we will call the `setupCloudIoT` to setup the Wi-Fi, the device time, and to start an MQTT client.  
 In the main loop, we need to maintain the MQTT connection, and call `publishTelemetry` every minute to send temperature + humidity data to Cloud IoT Core:
 
 ```c
@@ -302,8 +304,13 @@ void loop() {
 }
 ```
 
-Complete implementation available here:  
-[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/02-esp32_bme280_ciotc](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/02-esp32_bme280_ciotc)
+Complete implementation available below _(choose the one you prefer)_:
+
+- **Arduino implementation** _(using the "Google Cloud IoT Core JWT" and "Arduino MQTT" libraries)_:  
+[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/02-esp32_bme280_ciotc_arduino](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/02-esp32_bme280_ciotc_arduino)
+
+- **ESP-IDF (FreeRTOS) implementation** _(using the "Cloud IoT Device SDK")_:  
+[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/03-esp32_bme280_ciotc_esp-idf](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/03-esp32_bme280_ciotc_esp-idf)
 <br><br>
 
 
@@ -318,7 +325,7 @@ To easily deploy InfluxDB and Grafana instances to the Google Cloud, you could u
 I personally don't really like this approach, and prefer to create my own Kubernetes yaml files, which gives me more flexibility and also gives me the possibility to test it anytime on my local computer using tools such as `Minikube` or `Docker for Desktop`.
 
 Kubernetes scripts and howto are available here:  
-[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/04-influxdb_grafana_k8s](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/04-influxdb_grafana_k8s)
+[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/05-influxdb_grafana_k8s](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/05-influxdb_grafana_k8s)
 
 We can clone the project, then create the Kubernetes objects:
 ```sh
@@ -384,7 +391,7 @@ gcloud functions deploy iotcore_pubsub_to_influxdb \
 ```
 
 Complete implementation available here:  
-[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/05-cloud_function](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/05-cloud_function)
+[https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/06-cloud_function](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/06-cloud_function)
 
 
 And we have everything running!
@@ -394,9 +401,9 @@ And we have everything running!
 In this article, we discovered how Cloud IoT Core helps us to easily and securely connect large fleets of devices directly to the Google Cloud, using industry standard protocols such as HTTP or MQTT.
 
 Our ESP32 is now connected to the Google Cloud and is sending data there continuously.  
-You can find all the source code here: [https://github.com/Nilhcem/esp32-cloud-iot-core-k8s](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s)
+You can find the complete source code here: [https://github.com/Nilhcem/esp32-cloud-iot-core-k8s](https://github.com/Nilhcem/esp32-cloud-iot-core-k8s)
 
-Next time, we will use the official Cloud IoT Device SDK and see other ways to collect, process, analyze and visualize IoT data, skipping kubernetes, using only hosted Google services.
+Next time, will see other ways to collect, process, analyze and visualize IoT data, skipping kubernetes, using only hosted Google services.
 
 
 [home-monitoring-with-mqtt-influxdb-grafana]: http://nilhcem.com/iot/home-monitoring-with-mqtt-influxdb-grafana
@@ -405,9 +412,11 @@ Next time, we will use the official Cloud IoT Device SDK and see other ways to c
 [web-console]: http://console.cloud.google.com/
 [gcloud]: https://cloud.google.com/sdk/
 [quickstart-guide]: https://cloud.google.com/iot/docs/quickstart
-[jwt-script]: https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/03-generate-jwt/
+[jwt-script]: https://github.com/Nilhcem/esp32-cloud-iot-core-k8s/tree/master/04-generate-jwt/
 [cloud-iot-device-sdk]: https://github.com/GoogleCloudPlatform/iot-device-sdk-embedded-c
+[cloud-iot-device-sdk-esp32-sample]: https://github.com/espressif/esp-google-iot/
 [google-cloud-iot-arduino]: https://github.com/GoogleCloudPlatform/google-cloud-iot-arduino
+[arduino-mqtt]: https://github.com/256dpi/arduino-mqtt
 [gcp-marketplace]: https://cloud.google.com/marketplace/?hl=fr
 
 [pic01_esp32]: /public/images/20190302/01_esp32.jpg
