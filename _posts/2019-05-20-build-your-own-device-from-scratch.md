@@ -65,7 +65,7 @@ There's also a PCB tab to let you easily create a PCB layout for manufacturing, 
 
 ![pic05_fritzing_pcb]
 
-Once made, just click on the "Export for PCB" button to generate an Extended Gerber (RS274X) archive you can upload to various online PCB printing services websites such as [fab.fritzing.org](http://fab.fritzing.org) ([aisler.net](https://aisler.net)).
+Once made, just click on the "Export for PCB" button to generate an Extended Gerber (RS274X) archive you can upload to various online PCB printing services websites such as [pcbway.com](http://www.pcbway.com) or [aisler.net](https://aisler.net).
 <br><br>
 
 
