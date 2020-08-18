@@ -39,14 +39,14 @@ The most famous temperature and humidity sensors in the makers community are the
 
 ![pic03_dht22_bme280]
 
-After trying the 2 side by side for a few days, I noticed they were not giving me the exact same temperature: there was a ~2.5°C/36°F difference between the two sensors.
+After trying the 2 side by side for a few days, I noticed they were not giving me the exact same temperature: there was a ~2.5°C difference between the two sensors.
 
 Since both are giving me different data, how can I know which is the most accurate one? So I called my parents for help, and they lent me a few mercury thermometers.
 
 ![pic04_mercury_thermometers]
 
 The 2 mercury thermometers were displaying exactly the same temperature, so I assumed that they were accurate.  
-The DHT22 temperature was ~1.5°C/35°F lower. The BME280 temperature was 1°C/34°F higher.
+The DHT22 temperature was ~1.5°C lower. The BME280 temperature was 1°C higher.
 
 After some research, it turned out that, despite its impressive appearance, the DHT22 is actually not a very good sensor. The BME280 is better, but has its own problems too, as it suffers from **self-heating** in its default configuration _(sampling data continuously)_.
 
